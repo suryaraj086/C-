@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1654784007 source:/home/surya-inc1500/Files/Task1/main.cpp
+	<iostream>
+	"Car.h"
+	"Vehicle.h"
+	"Bike.h"
+
+1654782463 /home/surya-inc1500/Files/Task1/Car.h
+	<iostream>
+	"Vehicle.h"
+
+1654784706 /home/surya-inc1500/Files/Task1/Vehicle.h
+	"iostream"
+
+1654773627 /home/surya-inc1500/Files/Task1/Bike.h
+
