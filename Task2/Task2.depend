@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1654868979 source:/home/surya-inc1500/Files/Task2/main.cpp
+	<iostream>
+	"Sbi.h"
+	"Broker.h"
+	"Loan.h"
+
+1654867982 /home/surya-inc1500/Files/Task2/Sbi.h
+	"Bank.h"
+	"Loan.h"
+
+1654863272 /home/surya-inc1500/Files/Task2/Bank.h
+
+1654863107 /home/surya-inc1500/Files/Task2/Loan.h
+
+1654869611 /home/surya-inc1500/Files/Task2/Broker.h
+	"Sbi.h"
+	"Loan.h"
+	"Bank.h"
+	<iostream>
+
