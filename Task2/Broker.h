@@ -1,6 +1,5 @@
 #ifndef BROKER_H_INCLUDED
 #define BROKER_H_INCLUDED
-#include "Sbi.h";
 #include "Loan.h"
 #include "Bank.h"
 #include <bits/stdc++.h>
@@ -45,17 +44,16 @@ public:
     }
 
     template <class T>
-    Loan lowestInterest(T ptr[], int length, Loan temp)
+    Loan lowestInterest(T ptr[], int length)
     {
-        int minVal = INT_MAX;
+        T temp("sbi",1000.0);
+        double minVal = INT_MAX;
         for (int i = 0; i < length; i++)
         {
             T obj=ptr[i];
-            cout<<obj.getInterestRate()<<endl;
             if (ptr[i].getInterestRate() < minVal)
             {
                 minVal = ptr[i].getInterestRate();
-                cout<<minVal;
                 temp = ptr[i];
             }
         }

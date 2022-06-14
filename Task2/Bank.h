@@ -18,13 +18,21 @@ public:
         establishedDate = date;
         bankType = type;
     }
-    virtual string getName() {}
-    virtual string getEstablisedDate() {}
-    virtual string getBankType() {}
+    virtual string getName(){
+    return "";
+    }
+    virtual string getEstablisedDate(){
+    return "";
+    }
+    virtual string getBankType(){
+    return "";
+    }
     virtual string getInfo()
     {
-        return bankName + " " + branchName + " " + establishedDate + " " + bankType;
+      return bankName + " " + branchName + " " + establishedDate + " " + bankType;
     }
-    virtual string getBranchName() {}
+    virtual string getBranchName(){
+    return "";
+    }
 };
 #endif // BANK_H_INCLUDED

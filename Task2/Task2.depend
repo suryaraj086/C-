@@ -1,21 +1,25 @@
 # depslib dependency file v1.0
-1655183330 source:/home/surya-inc1500/Files/Task2/main.cpp
+1655191985 source:/home/surya-inc1500/Files/Task2/main.cpp
 	<iostream>
 	"Sbi.h"
 	"Broker.h"
 	"Loan.h"
+	"ICICI.h"
 
-1655183309 /home/surya-inc1500/Files/Task2/Sbi.h
+1655190708 /home/surya-inc1500/Files/Task2/Sbi.h
 	"Bank.h"
 	"Loan.h"
 
-1655126890 /home/surya-inc1500/Files/Task2/Bank.h
+1655192355 /home/surya-inc1500/Files/Task2/Bank.h
 
-1655183325 /home/surya-inc1500/Files/Task2/Loan.h
+1655192308 /home/surya-inc1500/Files/Task2/Loan.h
 
-1655183725 /home/surya-inc1500/Files/Task2/Broker.h
-	"Sbi.h"
+1655192161 /home/surya-inc1500/Files/Task2/Broker.h
 	"Loan.h"
 	"Bank.h"
 	<bits/stdc++.h>
+
+1655191353 /home/surya-inc1500/Files/Task2/ICICI.h
+	"Bank.h"
+	"Loan.h"
 

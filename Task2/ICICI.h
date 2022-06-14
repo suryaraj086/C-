@@ -1,10 +1,11 @@
-#ifndef SBI_H_INCLUDED
-#define SBI_H_INCLUDED
+#ifndef ICICI_H_INCLUDED
+#define ICICI_H_INCLUDED
 #include "Bank.h"
 #include "Loan.h"
+
 using namespace std;
 
-class Sbi : public Bank, public Loan
+class ICICI : public Bank, public Loan
 {
 private:
     string bankName;
@@ -18,7 +19,7 @@ private:
     double interestRate;
 
 public:
-    Sbi(string name, string branch, string date, string type, string availLoan, double rate) : Bank(name, branch, date, type), Loan(name, rate)
+    ICICI(string name, string branch, string date, string type, string availLoan, double rate) : Bank(name, branch, date, type), Loan(name, rate)
     {
         bankName = name;
         branchName = branch;
@@ -70,4 +71,7 @@ public:
     }
 };
 
-#endif // SBI_H_INCLUDED
+
+
+
+#endif // ICICI_H_INCLUDED
