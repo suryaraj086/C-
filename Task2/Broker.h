@@ -45,7 +45,7 @@ public:
     }
 
     template <class T>
-    Loan lowestInterest(T &ptr[], int length, Loan temp)
+    Loan lowestInterest(T ptr[], int length, Loan temp)
     {
         int minVal = INT_MAX;
         for (int i = 0; i < length; i++)
