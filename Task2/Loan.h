@@ -3,12 +3,27 @@
 using namespace std;
 class Loan
 {
+private:
+    string bankName;
+    double interestRate;
+
 public:
-virtual string getAvailableLoans()=0;
-virtual double getInterestRate()=0;
-virtual string goldLoanDocumentRequired()=0;
-virtual string personalLoanDocumentRequired()=0;
-virtual string landLoanDocumentRequired()=0;
+    Loan(string name, double rate)
+    {
+        bankName = name;
+        interestRate = rate;
+    }
+    virtual string getAvailableLoans() {}
+    virtual double getInterestRate()
+    {
+        return interestRate;
+    }
+    virtual string goldLoanDocumentRequired() {}
+    virtual string personalLoanDocumentRequired() {}
+    virtual string landLoanDocumentRequired() {}
+    virtual string getBankName() {
+    return bankName;
+    }
 };
 
 #endif // LOAN_H_INCLUDED

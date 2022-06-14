@@ -32,6 +32,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Bank.h" />
+		<Unit filename="Broker.h" />
+		<Unit filename="Loan.h" />
+		<Unit filename="Sbi.h" />
+		<Unit filename="Task" />
+		<Unit filename="Task.h" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>
