@@ -23,25 +23,32 @@ public:
         area = 0;
         cout << *area;
     }
+
     Rectangle(int high, int wid)
     {
         height = &high;
         width = &wid;
-        left = 0;
-        top = 0;
+        temp = 0;
+        left = &temp;
+        top = &temp;
     }
 
-    Rectangle(int high, int wid, int leftVal, int topVal)
+    Rectangle(int &high, int &wid, int &leftVal, int &topVal)
     {
-        height = &high;
-        width = &wid;
-        left = &leftVal;
-        top = &topVal;
+        this->height = &high;
+        this->width = &wid;
+        this->left = &leftVal;
+        this->top = &topVal;
     }
 
-    Rectangle(float high, float wid, float leftVal, float topVal)
+    Rectangle(float &high, float &wid, float &leftVal, float &topVal)
     {
-        cout << floor(high);
+        *height = (int)high;
+        *width = (int)wid;
+        *left = (int)leftVal;
+        *top = (int)topVal;
+        cout << "The height is " << *height;
+        cout << "The width is " << *width;
     }
 
     Rectangle(Rectangle &obj)
@@ -52,8 +59,8 @@ public:
         top = obj.top;
         temp = ((*height) * (*width));
         area = &temp;
-        cout << " The area is " << area;
     }
+
     int areaFind(int hei, int wid)
     {
         return hei * wid;
@@ -71,7 +78,10 @@ public:
 
     void print()
     {
-        cout << height << width << left << top;
+        cout << *height << endl
+             << *width << endl
+             << *left << endl
+             << *top;
     }
 };
 

@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1655205568 source:/home/surya-inc1500/Files/Task4/main.cpp
+1655219014 source:/home/surya-inc1500/Files/Task4/main.cpp
 	<iostream>
 	"Rectangle.h"
 
-1655206860 /home/surya-inc1500/Files/Task4/Rectangle.h
+1655219244 /home/surya-inc1500/Files/Task4/Rectangle.h
 	<iostream>
 	<cmath>
 
