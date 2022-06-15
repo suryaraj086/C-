@@ -1,0 +1,30 @@
+#include <iostream>
+#include "Math.h"
+#include "Temp.h"
+using namespace std;
+
+namespace first_space
+{
+   void func()
+   {
+      cout << "Inside first_space" << endl;
+   }
+   namespace second_space
+   {
+      void func()
+      {
+         cout << "Inside second_space" << endl;
+      }
+   }
+}
+
+using namespace first_space;
+int main()
+{
+    Temp t;
+    cout<<t.calculatePi();
+    cout<<maths::Math::pi();
+    func();
+    second_space::func();
+    return 0;
+}
