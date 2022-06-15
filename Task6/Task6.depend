@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1655300364 source:/home/surya-inc1500/Files/Task6/main.cpp
+	<iostream>
+	"Task6.h"
+	"Student.h"
+
+1655294935 /home/surya-inc1500/Files/Task6/Task6.h
+	<iostream>
+	"MyException.h"
+
+1655295710 /home/surya-inc1500/Files/Task6/MyException.h
+	<iostream>
+
+1655300682 /home/surya-inc1500/Files/Task6/Student.h
+	"AgeNotWithinRangeException.h"
+	"NameNotValidException.h"
+	"InvalidCouseException.h"
+	<iostream>
+
+1655298440 /home/surya-inc1500/Files/Task6/AgeNotWithinRangeException.h
+	<iostream>
+	<exception>
+
+1655298442 /home/surya-inc1500/Files/Task6/NameNotValidException.h
+	<iostream>
+	<exception>
+
+1655298447 /home/surya-inc1500/Files/Task6/InvalidCouseException.h
+	<iostream>
+	<exception>
+
