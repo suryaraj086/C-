@@ -12,6 +12,11 @@ private:
     int *top;
     int *area;
     int temp;
+    int height1;
+    int width1;
+    int left1;
+    int top1;
+    int area1;
 
 public:
     Rectangle()
@@ -43,12 +48,14 @@ public:
 
     Rectangle(float &high, float &wid, float &leftVal, float &topVal)
     {
-        *height = (int)high;
-        *width = (int)wid;
-        *left = (int)leftVal;
-        *top = (int)topVal;
-        cout << "The height is " << *height;
-        cout << "The width is " << *width;
+        height1 = (int)high;
+        width1 = (int)wid;
+        left1 = (int)leftVal;
+        top1 = (int)topVal;
+        height = &height1;
+        width = &width1;
+        left = &left1;
+        top = &top1;
     }
 
     Rectangle(Rectangle &obj)
@@ -78,10 +85,10 @@ public:
 
     void print()
     {
-        cout << *height << endl
-             << *width << endl
-             << *left << endl
-             << *top;
+        cout << "The height is " << *height << endl
+             << "The width is " << *width << endl
+             << "The left is " << *left << endl
+             << "The top is " << *top;
     }
 };
 
