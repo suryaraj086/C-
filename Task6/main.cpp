@@ -1,15 +1,17 @@
 #include <iostream>
 #include "Task6.h"
 #include "Student.h"
+#include "Store.h"
 using namespace std;
 
 int main()
 {
 Task6 obj;
+Store store;
 bool temp=true;
 while(temp)
 {
-cout<<"1.Division"<<endl<<"2.Add student details"<<endl<<"3.string index"<<endl<<"4.Array Index";
+cout<<"1.Division"<<endl<<"2.Add student details"<<endl<<"3.string index"<<endl<<"4.Array Index"<<endl;
 int val;
 cin>>val;
 switch(val)
@@ -46,6 +48,14 @@ case 2:
     string course;
     cin>>course;
     Student sObj(roll,age,name,course);
+    bool contains=store.contains(roll);
+    if(contains)
+    {
+    cout<<"user already exists";
+    continue;
+    break;
+    }
+    store.setIn(roll,sObj);
 break;
 }
 case 3:

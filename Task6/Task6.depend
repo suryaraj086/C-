@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1655303462 source:/home/surya-inc1500/Files/Task6/main.cpp
+1655356878 source:/home/surya-inc1500/Files/Task6/main.cpp
 	<iostream>
 	"Task6.h"
 	"Student.h"
+	"Store.h"
 
 1655294935 /home/surya-inc1500/Files/Task6/Task6.h
 	<iostream>
@@ -28,4 +29,8 @@
 1655298447 /home/surya-inc1500/Files/Task6/InvalidCouseException.h
 	<iostream>
 	<exception>
+
+1655356786 /home/surya-inc1500/Files/Task6/Store.h
+	"Student.h"
+	<bits/stdc++.h>
 
