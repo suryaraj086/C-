@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1655383831 source:/home/surya-inc1500/Files/Task7/main.cpp
+	<iostream>
+	"Task7.h"
+
+1655384310 /home/surya-inc1500/Files/Task7/Task7.h
+	<bits/stdc++.h>
+	<iostream>
+
