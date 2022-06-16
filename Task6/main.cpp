@@ -9,6 +9,7 @@ int main()
 {
     Task6 obj;
     Store store;
+    Checker c;
     bool temp = true;
     while (temp)
     {
@@ -41,7 +42,6 @@ int main()
         }
         case 2:
         {
-            Checker c;
             cout << "Enter the name" << endl;
             string name;
             cin >> name;
