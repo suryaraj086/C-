@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1655356878 source:/home/surya-inc1500/Files/Task6/main.cpp
+1655358236 source:/home/surya-inc1500/Files/Task6/main.cpp
 	<iostream>
 	"Task6.h"
 	"Student.h"
@@ -30,7 +30,7 @@
 	<iostream>
 	<exception>
 
-1655356786 /home/surya-inc1500/Files/Task6/Store.h
+1655357069 /home/surya-inc1500/Files/Task6/Store.h
 	"Student.h"
 	<bits/stdc++.h>
 

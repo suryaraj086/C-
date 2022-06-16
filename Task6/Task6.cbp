@@ -36,6 +36,7 @@
 		<Unit filename="InvalidCouseException.h" />
 		<Unit filename="MyException.h" />
 		<Unit filename="NameNotValidException.h" />
+		<Unit filename="Store.h" />
 		<Unit filename="Student.h" />
 		<Unit filename="Task6.h" />
 		<Unit filename="main.cpp" />
