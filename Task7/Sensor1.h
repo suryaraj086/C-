@@ -1,0 +1,6 @@
+#ifndef SENSOR1_H_INCLUDED
+#define SENSOR1_H_INCLUDED
+class
+
+
+#endif // SENSOR1_H_INCLUDED

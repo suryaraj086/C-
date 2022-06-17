@@ -1,9 +1,18 @@
 # depslib dependency file v1.0
-1655383831 source:/home/surya-inc1500/Files/Task7/main.cpp
+1655472392 source:/home/surya-inc1500/Files/Task7/main.cpp
 	<iostream>
 	"Task7.h"
+	<stdlib.h>
 
-1655384310 /home/surya-inc1500/Files/Task7/Task7.h
+1655470161 /home/surya-inc1500/Files/Task7/Task7.h
 	<bits/stdc++.h>
+	<iostream>
+	"TempAndWaterSensor.h"
+	"Sensor.h"
+
+1655471576 /home/surya-inc1500/Files/Task7/TempAndWaterSensor.h
+	<iostream>
+
+1655471579 /home/surya-inc1500/Files/Task7/Sensor.h
 	<iostream>
 
