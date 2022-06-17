@@ -1,7 +1,11 @@
 # depslib dependency file v1.0
-1655275548 source:/home/surya-inc1500/Files/Task5/main.cpp
+1655361597 source:/home/surya-inc1500/Files/Task5/main.cpp
 	<iostream>
 	"Math.h"
+	"Temp.h"
 
-1655277608 /home/surya-inc1500/Files/Task5/Math.h
+1655361233 /home/surya-inc1500/Files/Task5/Math.h
+
+1655361237 /home/surya-inc1500/Files/Task5/Temp.h
+	"Math.h"
 
