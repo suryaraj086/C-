@@ -1,11 +1,10 @@
-#ifndef BIKE_H
-#define BIKE_H
+#ifndef BIKES_H_INCLUDED
+#define BIKES_H_INCLUDED
 #include <iostream>
 #include "Vehicle.h"
-
 using namespace std;
 
-class Bike: public Vehicle
+class Bikes: public Vehicle
 {
         int weight;
         string bikeType;
@@ -17,12 +16,15 @@ class Bike: public Vehicle
             return 2;
         }
 
-        Bike(int weigh,string type,string col,string brnd,string mdl,int mil,int pri):Vehicle(type,col,brnd,mdl,mil,pri)
+        Bikes(int weigh,string type,string col,string brnd,string mdl,int mil,int pri):Vehicle(type,col,brnd,mdl,mil,pri)
         {
             weight=weigh;
             bikeType=type;
         }
+        ~Bikes()
+        {}
+
 
 };
 
-#endif // BIKE_H_INCLUDED
+#endif // BIKES_H_INCLUDED
