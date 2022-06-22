@@ -46,9 +46,13 @@ public class Book {
 		return seats;
 	}
 
-	public void setSeats(String key, Seat val) {
+	public void setSeats(String key, Seat val) throws Exception {
 		if (seats == null) {
 			seats = new HashMap<>();
+		}
+		if(seats.containsKey(key))
+		{
+			throw new Exception("Seat already booked");
 		}
 		this.seats.put(key, val);
 	}

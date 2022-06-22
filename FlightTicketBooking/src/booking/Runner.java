@@ -39,7 +39,17 @@ public class Runner {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
-			obj.setSeats(seatno, seat);
+			try {
+				obj.setSeats(seatno, seat);
+			} catch (Exception e) {
+				try {
+					fObj.bookingCancellation(id);
+				} catch (Exception e1) {
+					System.out.println(e1.getMessage());
+				}
+				System.out.println(e.getMessage());
+				return;
+			}
 		}
 		System.out.println("Do you want meal\n1.Yes\n2.No");
 		int preference = scan.nextInt();

@@ -160,7 +160,7 @@ public class FlightTicketBooking {
 		return "Booking successful";
 	}
 
-	public void seatAllocation(String flightName, List<String> list, Book obj) {
+	public void seatAllocation(String flightName, List<String> list, Book obj) throws Exception {
 		for (int i = 0; i < list.size(); i++) {
 			String seatName = list.get(i);
 			Seat seatObj = flight.get(flightName).get(seatName);
@@ -187,7 +187,7 @@ public class FlightTicketBooking {
 		availSeats.putAll(seat);
 		bookings.remove(bookingId);
 		int refund = refundCalculator(obj);
-		return "Cancelled successfully and the amount to be refunded is " + refund;
+		return "Cancelled successfully and the amount to be refunded is rs " + refund;
 	}
 
 	public String cancelIndividual(String seatName, int bookingId, String name, int age) throws Exception {
