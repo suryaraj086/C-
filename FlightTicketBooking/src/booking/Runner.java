@@ -1,6 +1,5 @@
 package booking;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -50,7 +49,7 @@ public class Runner {
 		}
 		obj = ObjectSetter.bookSetter(obj, arr, id, from, toDes, flightNum, pref);
 		System.out.println(fObj.flightBooking(arr, id, obj));
-		fObj.paymentCalculation(obj);
+		System.out.println("The amount to be paid is " + fObj.paymentCalculation(obj));
 		System.out.println("Your booking id is " + id);
 	}
 
@@ -65,11 +64,7 @@ public class Runner {
 			scan.nextLine();
 			switch (val) {
 			case 1:
-				try {
-					System.out.println(fObj.flightDetails());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				System.out.println(fObj.listOfFlights());
 				break;
 			case 2:
 				System.out.println("1.Filter using location\n2.Filter using business flights");
@@ -93,7 +88,11 @@ public class Runner {
 				case 1:
 					System.out.println("Enter the booking");
 					int bookingId = scan.nextInt();
-					System.out.println(fObj.bookingCancellation(bookingId));
+					try {
+						System.out.println(fObj.bookingCancellation(bookingId));
+					} catch (Exception e1) {
+						System.out.println(e1.getMessage());
+					}
 					break;
 				case 2:
 					System.out.println("Enter the booking id");
@@ -105,7 +104,11 @@ public class Runner {
 					String name = scan.nextLine();
 					System.out.println("Enter the age");
 					int age = scan.nextInt();
-					System.out.println(fObj.cancelIndividual(seatNum, bookId, name, age));
+					try {
+						System.out.println(fObj.cancelIndividual(seatNum, bookId, name, age));
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				default:
 					break;
 				}
@@ -122,7 +125,11 @@ public class Runner {
 			case 6:
 				System.out.println("Enter the booking id");
 				int bookId = scan.nextInt();
-				System.out.println(fObj.bookingSummary(bookId));
+				try {
+					System.out.println(fObj.bookingSummary(bookId));
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
 				break;
 			default:
 				break;

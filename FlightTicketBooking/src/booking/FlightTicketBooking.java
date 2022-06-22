@@ -20,44 +20,48 @@ public class FlightTicketBooking {
 	int economyClassPrice = 1000;
 	int aislePrice = 100;
 	int mealPrice = 200;
+	StringBuilder str = new StringBuilder();
 
 	public FlightTicketBooking() {
-
+		try {
+			flightDetails();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public String flightDetails() throws IOException {
 		FileReader fr = new FileReader("/home/surya-inc1500/eclipse-workspace/FlightTicketBooking/Files/Flights.txt");
 		int i;
-		StringBuilder str = new StringBuilder();
 		String str1 = "";
 		String inp = "";
 		while ((i = fr.read()) != -1) {
 			str.append((char) i);
-
 			if (i == 10) {
 				String[] arr = inp.split("-");
 				String flightName = arr[1];
 				String from = arr[2];
 				String toLoc = arr[3];
 				inp = "/home/surya-inc1500/eclipse-workspace/FlightTicketBooking/Files/" + inp + ".txt";
-				System.out.println(inp);
 				putDataInLocationMap(flightName, from, toLoc);
 				FileReader fr1 = new FileReader(inp);
 				int j;
 				while ((j = fr1.read()) != -1) {
 					str1 += ((char) j);
 				}
-				str1 = str1.replaceAll("Business", "");
-				str1 = str1.replaceAll("Economy", "");
+				str1 = str1.replaceAll("Business :", "");
+				str1 = str1.replaceAll("Economy :", "");
 				str1 = str1.replaceAll("\\{", "");
 				str1 = str1.replaceAll("}", "");
-				str1 = str1.replaceAll(":", "");
 				str1 = str1.replaceAll(" ", "");
-				str1 = str1.replaceAll("\n", ",");
-				String array[] = str1.split(",");
+				str1 = str1.replaceAll("\n", ":");
+				String[] classType = str1.split(":");
+				String array[] = classType[0].split(",");
+				String array1[] = classType[1].split(",");
 				int[] values = Arrays.stream(array).mapToInt(Integer::parseInt).toArray();
+				int[] values1 = Arrays.stream(array1).mapToInt(Integer::parseInt).toArray();
 				createSeatObj(1, values[3], values, true, flightName);
-				createSeatObj(values[3], values[7] + values[3], values, false, flightName);
+				createSeatObj(values[3], values1[3] + values[3], values1, false, flightName);
 				inp = "";
 				fr1.close();
 			}
@@ -72,11 +76,10 @@ public class FlightTicketBooking {
 		int number = 0;
 		for (int k = val; k <= row; k++) {
 			number = 0;
-			for (int i = 0; i < arr.length; i++) {
+			for (int i = 0; i < arr.length - 1; i++) {
 				for (int j = 1; j <= arr[i]; j++) {
 					number += 1;
 					String inp = (k + "" + (char) (number + 64));
-					System.out.println(inp);
 					if (j == 1 || j == arr[i]) {
 						seat = ObjectSetter.seatSetter(true, isBusinessClass, inp, flightNo);
 						Map<String, Seat> map = new HashMap<>();
@@ -140,6 +143,10 @@ public class FlightTicketBooking {
 		fw.close();
 	}
 
+	public String listOfFlights() {
+		return str.toString();
+	}
+
 	public List<String> searchFlight(String from, String toDes) {
 		Map<String, List<String>> temp = location.get(from);
 		List<String> list = temp.get(toDes);
@@ -169,20 +176,24 @@ public class FlightTicketBooking {
 		return seat;
 	}
 
-	public String bookingCancellation(int bookingId) {
+	public String bookingCancellation(int bookingId) throws Exception {
 		Book obj = bookings.get(bookingId);
+		nullChecker(obj);
 		Map<String, Seat> seat = obj.getSeats();
 		String flightName = obj.getFlightName();
 		Map<String, Seat> availSeats = flight.get(flightName);
 		availSeats.putAll(seat);
 		bookings.remove(bookingId);
-		return "Cancelled successfully";
+		int refund = refundCalculator(obj);
+		return "Cancelled successfully and the amount to be refunded is " + refund;
 	}
 
-	public String cancelIndividual(String seatName, int bookingId, String name, int age) {
+	public String cancelIndividual(String seatName, int bookingId, String name, int age) throws Exception {
 		Book obj = bookings.get(bookingId);
 		Map<String, Seat> map = obj.getSeats();
+		nullChecker(map);
 		Seat seat = map.get(seatName);
+		nullChecker(seat);
 		Map<String, Seat> flightMap = flight.get(obj.getFlightName());
 		flightMap.put(seatName, seat);
 		map.remove(seatName);
@@ -192,11 +203,21 @@ public class FlightTicketBooking {
 				pass.remove(i);
 			}
 		}
+		int amount = obj.getAmount();
+		int individual = amount / map.size();
+		amount = amount - individual + 200;
+		obj.setAmount(amount);
 		return "Cancellation successful";
 	}
 
 	public int bookingIds() {
 		return bookingId++;
+	}
+
+	public void nullChecker(Object inp) throws Exception {
+		if (inp == null) {
+			throw new Exception("Not found");
+		}
 	}
 
 	public List<String> mealOrderedSeats() {
@@ -216,8 +237,10 @@ public class FlightTicketBooking {
 		return freeSeats;
 	}
 
-	public Book bookingSummary(int bookingId) {
-		return bookings.get(bookingId);
+	public Book bookingSummary(int bookingId) throws Exception {
+		Book book = bookings.get(bookingId);
+		nullChecker(book);
+		return book;
 	}
 
 	public int paymentCalculation(Book obj) {
@@ -238,6 +261,12 @@ public class FlightTicketBooking {
 			}
 		}
 		obj.setAmount(amount);
+		return amount;
+	}
+
+	public int refundCalculator(Book obj) {
+		int amount = obj.getAmount();
+		amount = amount - (obj.getPassenger().size() * 200);
 		return amount;
 	}
 
