@@ -27,6 +27,7 @@ public class ChessGameManagement {
 		whitePosition.put("c1", "W_B");
 		whitePosition.put("d1", "W_Q");
 		whitePosition.put("e1", "W_K");
+		whitePosition.put("f2", "W_P");
 		whitePosition.put("f1", "W_B");
 		whitePosition.put("g1", "W_N");
 		whitePosition.put("h1", "W_R");
@@ -35,6 +36,7 @@ public class ChessGameManagement {
 		blackPosition.put("b8", "B_N");
 		blackPosition.put("c8", "B_B");
 		blackPosition.put("d8", "B_Q");
+		blackPosition.put("d7", "B_Q");
 		blackPosition.put("e8", "B_K");
 		blackPosition.put("f8", "B_B");
 		blackPosition.put("g8", "B_N");
@@ -53,6 +55,9 @@ public class ChessGameManagement {
 				char val = (char) (cd + 1 + 96);
 				movedPosition = val + "" + (rd + 1);
 				checker(movedPosition, rd, cd, grid);
+				if (path.size() != 0 && path.get(path.size() - 1).contains("(can be occupied)")) {
+					break;
+				}
 				movedPosition = "";
 				rd += x[dir];
 				cd += y[dir];
@@ -98,7 +103,9 @@ public class ChessGameManagement {
 				char val = (char) (cd + 1 + 96);
 				movedPosition = val + "" + (rd + 1);
 				checker(movedPosition, rd, cd, grid);
-				movedPosition = "";
+				if (path.size() != 0 && path.get(path.size() - 1).contains("(can be occupied)")) {
+					break;
+				}
 				movedPosition = "";
 				rd += diagonal[dir];
 				cd += diagonal1[dir];
@@ -116,6 +123,9 @@ public class ChessGameManagement {
 				char val = (char) (cd + 1 + 96);
 				movedPosition = val + "" + (rd + 1);
 				checker(movedPosition, rd, cd, grid);
+				if (path.size() != 0 && path.get(path.size() - 1).contains("(can be occupied)")) {
+					break;
+				}
 				movedPosition = "";
 				rd += horizontal[dir];
 				cd += vertical[dir];
@@ -132,6 +142,7 @@ public class ChessGameManagement {
 			char val = (char) (cd + 1 + 96);
 			movedPosition = val + "" + (rd + 1);
 			checker(movedPosition, rd, cd, grid);
+
 			movedPosition = "";
 			if (color.equals("W_")) {
 				rd += 1;
@@ -263,6 +274,12 @@ public class ChessGameManagement {
 		}
 	}
 
+	public void allBlackPath() throws Exception {
+		for (String position : blackPosition.keySet()) {
+			queen(position);
+		}
+	}
+
 	public void whiteCheckMateChecker() throws Exception {
 		for (String position : whitePosition.keySet()) {
 			String piece = whitePosition.get(position);
@@ -273,30 +290,32 @@ public class ChessGameManagement {
 				int[][] grid = new int[8][8];
 				grid[val1][val] = 2;
 				kingMovement(grid, val1, val, 0);
-				if (kingPath.isEmpty()) {
-					throw new Exception("CheckMate");
+				allBlackPath();
+				if (path.contains(position + "(can be occupied)") && !path.containsAll(kingPath)) {
+					throw new Exception("Check");
+				} else if (path.contains(position + "(can be occupied)") && path.containsAll(kingPath)) {
+					throw new Exception("Check Mate");
 				}
 			}
 		}
+		kingPath.clear();
+		return;
 	}
-	
-	public String print()
-	{
-		String[][] arr=new String[8][8];
-		for(String pos:whitePosition.keySet())
-		{
+
+	public String print() {
+		String[][] arr = new String[8][8];
+		for (String pos : whitePosition.keySet()) {
 			int col = pos.charAt(0) - 96 - 1;
 			int row = Integer.parseInt(pos.charAt(1) + "") - 1;
-			String piece=whitePosition.get(pos);
-			arr[row][col]=piece;
+			String piece = whitePosition.get(pos);
+			arr[row][col] = piece;
 		}
-		
-		for(String pos:blackPosition.keySet())
-		{
+
+		for (String pos : blackPosition.keySet()) {
 			int col = pos.charAt(0) - 96 - 1;
 			int row = Integer.parseInt(pos.charAt(1) + "") - 1;
-			String piece=blackPosition.get(pos);
-			arr[row][col]=piece;
+			String piece = blackPosition.get(pos);
+			arr[row][col] = piece;
 		}
 		return Arrays.deepToString(arr);
 	}
@@ -306,16 +325,16 @@ public class ChessGameManagement {
 		if (whitePosition.get(position) != null) {
 			piece = whitePosition.get(position);
 			color = "W_";
-		} else if (blackPosition.get(piece) != null) {
+		} else if (blackPosition.get(position) != null) {
 			piece = blackPosition.get(position);
 			color = "B_";
 		}
 		int val = position.charAt(0) - 96 - 1;
 		int val1 = Integer.parseInt(position.charAt(1) + "") - 1;
+
 		int[][] grid = new int[8][8];
 		grid[val1][val] = 2;
 		if (piece.contains("_R")) {
-
 			rookMovement(grid, val1, val, 0);
 		} else if (piece.contains("_Q")) {
 
@@ -333,7 +352,6 @@ public class ChessGameManagement {
 
 			pawnMovement(grid, val1, val, 0);
 		}
-
 		return path;
 	}
 

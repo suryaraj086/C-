@@ -29,10 +29,12 @@ public class GameRunner {
 					obj.movement(movedPosition, chosenPosition);
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
+					if (e.getMessage().equals("Check Mate")) {
+						System.out.println("---------------game ended-------------");
+						return;
+					}
 				}
-
 			}
-
 		}
 		scan.close();
 	}
