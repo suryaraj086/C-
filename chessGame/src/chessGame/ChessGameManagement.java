@@ -1,7 +1,6 @@
 package chessGame;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -146,11 +145,49 @@ public class ChessGameManagement {
 			movedPosition = "";
 			if (color.equals("W_")) {
 				rd += 1;
+
 			} else if (color.equals("B_")) {
 				rd -= 1;
 			}
 		}
+
+		movedPosition = "";
+		if (color.equals("W_")) {
+			rd += 1;
+			cd -= 1;
+		} else if (color.equals("B_")) {
+			rd -= 1;
+			cd -= 1;
+		}
+		char val = (char) (cd + 1 + 96);
+		movedPosition = val + "" + (rd + 1);
+		pawnChecker(movedPosition, rd, cd, grid);
+
+		if (color.equals("W_")) {
+			rd += 1;
+			cd += 1;
+		} else if (color.equals("B_")) {
+			rd -= 1;
+			cd += 1;
+		}
+		val = (char) (cd + 1 + 96);
+		movedPosition = val + "" + (rd + 1);
+		pawnChecker(movedPosition, rd, cd, grid);
+
 		return false;
+	}
+
+	public void pawnChecker(String movedPosition, int row, int col, int[][] grid) {
+		int rd = row, cd = col;
+		if (rd >= grid.length || rd < 0 || cd >= grid[0].length || cd < 0
+				|| (whitePosition.get(movedPosition) != null && color.equals("W_"))
+				|| (blackPosition.get(movedPosition) != null && color.equals("B_"))) {
+
+		} else if (blackPosition.get(movedPosition) != null && color.equals("W_")) {
+			path.add(movedPosition + "(can be occupied)");
+		} else if (whitePosition.get(movedPosition) != null && color.equals("B_")) {
+			path.add(movedPosition + "(can be occupied)");
+		}
 	}
 
 	public int pawnChecker(int row) {
