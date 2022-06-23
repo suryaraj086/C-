@@ -10,7 +10,7 @@ public class ChessGameManagement {
 
 	Map<String, String> whitePosition = new HashMap<>();
 	Map<String, String> blackPosition = new HashMap<>();
-	Map<String, String> recording = new HashMap<>();
+	List<String> recording = new ArrayList<>();
 	String color;
 	int x[] = { -1, -1, -1, 0, 0, 1, 1, 1 };
 	int y[] = { -1, 0, 1, -1, 1, -1, 0, 1 };
@@ -231,22 +231,31 @@ public class ChessGameManagement {
 			piece = blackPosition.get(previousPosition);
 		}
 		if (piece.contains("W_")) {
+
 			whitePosition.remove(previousPosition);
 			whitePosition.put(movedPosition, piece);
-			blackPosition.remove(movedPosition);
+			if (blackPosition.get(previousPosition) != null) {
+				recording.add(piece + " at " + previousPosition + "has been captured "
+						+ blackPosition.get(previousPosition) + " to " + movedPosition);
+				blackPosition.remove(movedPosition);
+			}
 			path.clear();
 			blackCheckMateChecker();
 		} else if (piece.contains("B_")) {
 			blackPosition.remove(previousPosition);
 			blackPosition.put(movedPosition, piece);
-			whitePosition.remove(movedPosition);
+			if (whitePosition.get(previousPosition) != null) {
+				recording.add(piece + " at " + previousPosition + "has been captured "
+						+ whitePosition.get(previousPosition) + " to " + movedPosition);
+				whitePosition.remove(movedPosition);
+			}
 			path.clear();
 			whiteCheckMateChecker();
 		} else {
 			return;
 		}
 		path.clear();
-		recording.put(piece, movedPosition);
+		recording.add(piece + " moved from " + previousPosition + " to " + movedPosition);
 	}
 
 	public void blackCheckMateChecker() throws Exception {
@@ -337,6 +346,7 @@ public class ChessGameManagement {
 		int[][] grid = new int[8][8];
 		grid[val1][val] = 2;
 		if (piece.contains("_R")) {
+
 			rookMovement(grid, val1, val, 0);
 		} else if (piece.contains("_Q")) {
 

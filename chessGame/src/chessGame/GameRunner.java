@@ -31,6 +31,7 @@ public class GameRunner {
 					System.out.println(e.getMessage());
 					if (e.getMessage().equals("Check Mate")) {
 						System.out.println("---------------game ended-------------");
+						scan.close();
 						return;
 					}
 				}
