@@ -1,5 +1,6 @@
 package chessGame;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class GameRunner {
@@ -16,7 +17,18 @@ public class GameRunner {
 				System.out.println("--------Exiting the game-------");
 				break;
 			} else if (chosenPosition.equals("print")) {
-				System.out.println(obj.print());
+				String[][] arr = obj.print();
+				for (int i = 0; i < arr.length; i++) {
+					System.out.print(i+1+" ");
+					for (int j = 0; j < arr[0].length; j++) {
+						if (arr[i][j] != null) {
+							System.out.print(arr[i][j] + "  ");
+						} else {
+							System.out.print("   ");
+						}
+					}
+					System.out.println();
+				}
 			} else {
 				try {
 					System.out.println(obj.queen(chosenPosition));

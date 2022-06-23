@@ -313,7 +313,7 @@ public class ChessGameManagement {
 		return;
 	}
 
-	public String print() {
+	public String[][] print() {
 		String[][] arr = new String[8][8];
 		for (String pos : whitePosition.keySet()) {
 			int col = pos.charAt(0) - 96 - 1;
@@ -328,7 +328,7 @@ public class ChessGameManagement {
 			String piece = blackPosition.get(pos);
 			arr[row][col] = piece;
 		}
-		return Arrays.deepToString(arr);
+		return arr;
 	}
 
 	public List<String> queen(String position) throws Exception {
