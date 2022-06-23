@@ -259,8 +259,10 @@ public class ChessGameManagement {
 				int[][] grid = new int[8][8];
 				grid[val1][val] = 2;
 				allWhitePath();
-				if (path.contains(position + "(can be occupied)")) {
+				if (path.contains(position + "(can be occupied)") && !path.containsAll(kingPath)) {
 					throw new Exception("Check");
+				} else if (path.contains(position + "(can be occupied)") && path.containsAll(kingPath)) {
+					throw new Exception("Check Mate");
 				}
 			}
 		}
