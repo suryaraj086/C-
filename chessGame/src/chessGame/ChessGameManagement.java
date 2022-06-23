@@ -21,9 +21,6 @@ public class ChessGameManagement {
 
 	public int queenPath(int N, int x, int y, int num) {
 		int[][] grid = new int[N][N];
-//		for (int i = 0; i < kx1.length; i++) {
-//			grid[kx1[i]][kx2[i]] = 1;
-//		}
 		grid[x][y] = 2;
 		queensMovement(grid, x, y, num);
 		return temp1;
@@ -53,7 +50,6 @@ public class ChessGameManagement {
 				movedPosition = "";
 				rd += x[dir];
 				cd += y[dir];
-
 			}
 		}
 		return false;
@@ -111,6 +107,84 @@ public class ChessGameManagement {
 		return false;
 	}
 
+	boolean knightMovement(int[][] grid, int row, int col, int num) {
+
+		String movedPosition;
+
+		int cd = col - 2, rd = row - 1;
+		if (rd >= grid.length || rd < 0 || cd >= grid[0].length || cd < 0) {
+
+		} else {
+			char val = (char) (cd + 1 + 96);
+			movedPosition = val + "" + (rd + 1);
+			path.add(movedPosition);
+		}
+		cd = col - 1;
+		rd = row - 2;
+		if (rd >= grid.length || rd < 0 || cd >= grid[0].length || cd < 0) {
+		} else {
+			char val = (char) (cd + 1 + 96);
+			movedPosition = val + "" + (rd + 1);
+			path.add(movedPosition);
+		}
+		cd = col + 1;
+		rd = row + 2;
+		if (rd >= grid.length || rd < 0 || cd >= grid[0].length || cd < 0) {
+
+		} else {
+			char val = (char) (cd + 1 + 96);
+			movedPosition = val + "" + (rd + 1);
+			path.add(movedPosition);
+		}
+		cd = col + 2;
+		rd = row + 1;
+		if (rd >= grid.length || rd < 0 || cd >= grid[0].length || cd < 0) {
+
+		} else {
+			char val = (char) (cd + 1 + 96);
+			movedPosition = val + "" + (rd + 1);
+			path.add(movedPosition);
+		}
+		cd = col - 1;
+		rd = row + 2;
+		if (rd >= grid.length || rd < 0 || cd >= grid[0].length || cd < 0) {
+
+		} else {
+			char val = (char) (cd + 1 + 96);
+			movedPosition = val + "" + (rd + 1);
+			path.add(movedPosition);
+		}
+		cd = col + 1;
+		rd = row - 2;
+		if (rd >= grid.length || rd < 0 || cd >= grid[0].length || cd < 0) {
+
+		} else {
+			char val = (char) (cd + 1 + 96);
+			movedPosition = val + "" + (rd + 1);
+			path.add(movedPosition);
+		}
+		cd = col - 2;
+		rd = row + 1;
+		if (rd >= grid.length || rd < 0 || cd >= grid[0].length || cd < 0) {
+
+		} else {
+			char val = (char) (cd + 1 + 96);
+			movedPosition = val + "" + (rd + 1);
+			path.add(movedPosition);
+		}
+		cd = col + 2;
+		rd = row - 1;
+		if (rd >= grid.length || rd < 0 || cd >= grid[0].length || cd < 0) {
+
+		} else {
+			char val = (char) (cd + 1 + 96);
+			movedPosition = val + "" + (rd + 1);
+			path.add(movedPosition);
+		}
+
+		return false;
+	}
+
 	public List<String> queen(String position) {
 		String piece = "";
 		if (whitePosition.get(position) != null) {
@@ -133,6 +207,9 @@ public class ChessGameManagement {
 			grid[val1][val] = 2;
 			bishopMovement(grid, val1, val, 0);
 		} else if (piece.contains("_N")) {
+			int[][] grid = new int[8][8];
+			grid[val1][val] = 2;
+			knightMovement(grid, val1, val, 0);
 		} else if (piece.contains("_p")) {
 			int[][] grid = new int[8][8];
 			grid[val1][val] = 2;
@@ -142,7 +219,7 @@ public class ChessGameManagement {
 //		queenPath(8, val1, val, 0);
 		int[][] grid = new int[8][8];
 		grid[val1][val] = 2;
-		bishopMovement(grid, val1, val, 0);
+		knightMovement(grid, val1, val, 0);
 		return path;
 	}
 
