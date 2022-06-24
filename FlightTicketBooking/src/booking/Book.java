@@ -50,8 +50,7 @@ public class Book {
 		if (seats == null) {
 			seats = new HashMap<>();
 		}
-		if(seats.containsKey(key))
-		{
+		if (seats.containsKey(key)) {
 			throw new Exception("Seat already booked");
 		}
 		this.seats.put(key, val);
@@ -109,7 +108,7 @@ public class Book {
 	public String toString() {
 		return "Book [bookingId=" + bookingId + ", passenger=" + passenger + ", from Location=" + fromLoc
 				+ ", Destination=" + toLoc + ", takeOffTime=" + takeOffTime + ", landingTime=" + landingTime
-				+ ", seats=" + seats + ", flightName=" + flightName + ", Meal preference=" + mealPreference + "]";
+				+ ", seats=" + seats + ", flightName=" + flightName + ", Meal preference=" + mealPreference + "]\n";
 	}
 
 }

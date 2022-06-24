@@ -26,7 +26,7 @@ public class Seat {
 	@Override
 	public String toString() {
 		return "Seat [seatName=" + seatName + ", flightNo=" + flightNo + ", isBusinessClass=" + isBusinessClass
-				+ ", isBusinessFlight=" + isBusinessFlight + ", aisleOrWindow=" + aisleOrWindow + "]";
+				+ ", isBusinessFlight=" + isBusinessFlight + ", aisleOrWindow=" + aisleOrWindow + "]\n";
 	}
 
 	public boolean isBusinessClass() {

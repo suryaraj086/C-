@@ -20,6 +20,7 @@ public class FlightTicketBooking {
 	int economyClassPrice = 1000;
 	int aislePrice = 100;
 	int mealPrice = 200;
+
 	StringBuilder str = new StringBuilder();
 
 	public FlightTicketBooking() {
@@ -149,9 +150,15 @@ public class FlightTicketBooking {
 		return str.toString();
 	}
 
-	public List<String> searchFlight(String from, String toDes) {
+	public List<String> searchFlight(String from, String toDes) throws Exception {
 		Map<String, List<String>> temp = location.get(from);
+		if (temp == null) {
+			throw new Exception("No flights found");
+		}
 		List<String> list = temp.get(toDes);
+		if (list == null) {
+			throw new Exception("No flights found");
+		}
 		return list;
 	}
 
@@ -233,9 +240,11 @@ public class FlightTicketBooking {
 		return seats;
 	}
 
-	public Map<String, Seat> availableSeats(String flightName) {
+	public Map<String, Seat> availableSeats(String flightName) throws Exception {
 		Map<String, Seat> freeSeats = flight.get(flightName);
-		System.out.println(freeSeats);
+		if (freeSeats == null) {
+			throw new Exception("Flight not found");
+		}
 		return freeSeats;
 	}
 

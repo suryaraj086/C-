@@ -13,7 +13,11 @@ public class Runner {
 		System.out.println("Enter Destination");
 		String toDes = scan.nextLine();
 		System.out.println("The total flights are");
-		System.out.println(fObj.searchFlight(from, toDes));
+		try {
+			System.out.println(fObj.searchFlight(from, toDes));
+		} catch (Exception e2) {
+			System.out.println(e2.getMessage());
+		}
 		System.out.println("Enter the flight number");
 		String flightNum = scan.nextLine();
 		System.out.println("Enter the number of passengers");
@@ -126,7 +130,11 @@ public class Runner {
 			case 4:
 				System.out.println("Enter the flight name");
 				String name = scan.nextLine();
-				System.out.println(fObj.availableSeats(name));
+				try {
+					System.out.println(fObj.availableSeats(name));
+				} catch (Exception e1) {
+					System.out.println(e1.getMessage());
+				}
 				break;
 
 			case 5:
