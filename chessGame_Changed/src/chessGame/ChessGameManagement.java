@@ -21,6 +21,8 @@ public class ChessGameManagement {
 	List<String> kingPath = new ArrayList<>();
 	List<String> vulnerablePositions = new ArrayList<>();
 	String vulnerableString;
+	String currentPiece;
+	String positionOfCurrentPiece;
 
 	public ChessGameManagement() {
 		whitePosition.put("a1", "W_R");
@@ -262,8 +264,10 @@ public class ChessGameManagement {
 		} else {
 			path.add(movedPosition);
 		}
-		if (movedPosition.contains(vulnerableString)) {
-			vulnerablePositions.add(movedPosition);
+
+		if (vulnerableString != null && movedPosition != null && movedPosition.matches("^[a-zA-Z0-9]*$")
+				&& movedPosition.contains(vulnerableString)) {
+			vulnerablePositions.add(currentPiece + " at " + positionOfCurrentPiece + " can capture your coin");
 		}
 	}
 
@@ -343,15 +347,21 @@ public class ChessGameManagement {
 		}
 	}
 
-	public void checkVulnerabilty(String piece, String position) throws Exception {
+	public List<String> checkVulnerabilty(String piece, String position) throws Exception {
+		vulnerableString = position;
+
 		if (piece.contains("W_")) {
+
 			allBlackPath();
-			if (path.contains(position)) {
+			return vulnerablePositions;
 
-			}
 		} else if (piece.contains("B_")) {
-
+			allWhitePath();
+			return vulnerablePositions;
 		}
+		vulnerableString = null;
+		vulnerablePositions.clear();
+		return vulnerablePositions;
 	}
 
 	public void whiteCheckMateChecker() throws Exception {
@@ -396,6 +406,7 @@ public class ChessGameManagement {
 
 	public List<String> queen(String position) throws Exception {
 		String piece = "";
+
 		if (whitePosition.get(position) != null) {
 			piece = whitePosition.get(position);
 			color = "W_";
@@ -409,23 +420,31 @@ public class ChessGameManagement {
 		int[][] grid = new int[8][8];
 		grid[val1][val] = 2;
 		if (piece.contains("_R")) {
-
+			currentPiece = piece;
+			positionOfCurrentPiece = position;
 			rookMovement(grid, val1, val, 0);
 		} else if (piece.contains("_Q")) {
-
+			currentPiece = piece;
+			positionOfCurrentPiece = position;
 			queensMovement(grid, val1, val, 0);
 		} else if (piece.contains("_K")) {
+			currentPiece = piece;
+			positionOfCurrentPiece = position;
 			queensMovement(grid, val1, val, 1);
-
 		} else if (piece.contains("_B")) {
-
+			currentPiece = piece;
+			positionOfCurrentPiece = position;
 			bishopMovement(grid, val1, val, 0);
 		} else if (piece.contains("_N")) {
-
+			currentPiece = piece;
+			positionOfCurrentPiece = position;
 			knightMovement(grid, val1, val, 0);
 		} else if (piece.contains("_p")) {
-
+			currentPiece = piece;
+			positionOfCurrentPiece = position;
 			pawnMovement(grid, val1, val, 0);
+		} else if(piece.isEmpty()){
+			throw new Exception("No Piece Found");
 		}
 		return path;
 	}

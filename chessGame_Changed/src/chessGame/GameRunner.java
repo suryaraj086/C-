@@ -31,8 +31,14 @@ public class GameRunner {
 				}
 			} else if (chosenPosition.contains("--help")) {
 				String position=chosenPosition.charAt(0)+""+chosenPosition.charAt(1);
+				System.out.println(position);
 				System.out.println("Enter the coin to move");
 				String coin=scan.nextLine();
+				try {
+					System.out.println(obj.checkVulnerabilty(coin, position));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			} else {
 				if (obj.getWhitePiece(chosenPosition) != null && count % 2 != 0) {
 					System.out.println("Black's turn");
@@ -45,6 +51,7 @@ public class GameRunner {
 						System.out.println(obj.queen(chosenPosition));
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
+						continue;
 					}
 					System.out.println("Enter the moved position");
 					String movedPosition = scan.nextLine();
