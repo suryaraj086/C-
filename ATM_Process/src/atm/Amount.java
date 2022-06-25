@@ -17,8 +17,20 @@ public enum Amount {
 		return twoThosandCount;
 	}
 
+	public long fiveHundredTotal() {
+		return 500 * fiveHundredCount;
+	}
+
+	public long hundredTotal() {
+		return 100 * hundredCount;
+	}
+
+	public long twoThousandTotal() {
+		return 2000 * twoThosandCount;
+	}
+
 	public void setTwoThosandCount(int twoThosandCount) throws Exception {
-		if (twoThosandCount <= 0) {
+		if (twoThosandCount < 0) {
 			throw new Exception("Not Enough change");
 		}
 		this.twoThosandCount = twoThosandCount;

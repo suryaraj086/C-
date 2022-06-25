@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ATM_Process {
+public class ATM_Process extends Thread {
 
 	Map<Long, CustomerDetails> map = new HashMap<>();
 	Map<Long, List<Transaction>> transaction = new HashMap<>();
@@ -25,6 +25,16 @@ public class ATM_Process {
 		cus.setCustomerId(1);
 		long val = 1;
 		map.put(val, cus);
+	}
+
+	public void run() {
+		try {
+			sleep(5000);
+			System.out.println("Thread after delay");
+			storeTransactionToFile();
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void loadToATM(int twoThosand, int fiveHundred, int hundred) throws Exception {
@@ -112,6 +122,10 @@ public class ATM_Process {
 		transaction.put(accNo, arr);
 		balance -= amount;
 		obj.setAccountBalance(balance);
+		Thread t1 = Thread.currentThread();
+		ATM_Process t = new ATM_Process();
+		t.start();
+		t.setName("Asynchronous");
 		return "Withdraw Successful";
 	}
 
@@ -217,8 +231,7 @@ public class ATM_Process {
 			}
 			fw.close();
 		}
-		Thread t = new Thread();
-		t.start();
+
 	}
 
 	public void storeAtMCashToFile() throws IOException {
