@@ -32,6 +32,7 @@ public class ATM_Process extends Thread {
 			sleep(5000);
 			System.out.println("Thread after delay");
 			storeTransactionToFile();
+			interrupt();
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -122,7 +123,6 @@ public class ATM_Process extends Thread {
 		transaction.put(accNo, arr);
 		balance -= amount;
 		obj.setAccountBalance(balance);
-		Thread t1 = Thread.currentThread();
 		ATM_Process t = new ATM_Process();
 		t.start();
 		t.setName("Asynchronous");
@@ -223,7 +223,7 @@ public class ATM_Process extends Thread {
 			Transaction obj1 = arr.get(0);
 			File f = new File(obj1.getCustomerId() + "_transacion.txt");
 			f.createNewFile();
-			fw = new FileWriter(f);
+			fw = new FileWriter(f, true);
 			fw.write("Transaction number\tDescription\tDebit/Credit\tAmount\tClosing Balance\n");
 			for (int i = 0; i < arr.size(); i++) {
 				Transaction obj = arr.get(i);
@@ -231,12 +231,25 @@ public class ATM_Process extends Thread {
 			}
 			fw.close();
 		}
+	}
 
+	public void storeCustomerDetailsToFile() throws IOException {
+		File f = new File("Customerdetails.txt");
+		if (!f.exists()) {
+			f.createNewFile();
+		}
+		FileWriter fw = new FileWriter(f);
+		for (CustomerDetails obj : map.values()) {
+			fw.write(obj.toString());
+			fw.close();
+		}
 	}
 
 	public void storeAtMCashToFile() throws IOException {
 		File f = new File("ATM.txt");
-		f.createNewFile();
+		if (!f.exists()) {
+			f.createNewFile();
+		}
 		FileWriter fw = new FileWriter(f);
 		fw.write(checkATMBalance());
 		fw.close();

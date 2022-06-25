@@ -89,6 +89,7 @@ public class ATM_Starter {
 
 			default:
 				try {
+					obj.storeCustomerDetailsToFile();
 					obj.storeTransactionToFile();
 //					obj.storeAtMCashToFile();
 					obj.loadAtMCashFromFile();

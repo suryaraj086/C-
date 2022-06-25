@@ -49,8 +49,7 @@ public class CustomerDetails {
 
 	@Override
 	public String toString() {
-		return "         " + accNo + ",         " + accountHolder + "      " + pinNumber + "         " + accountBalance
-				+ "\n";
+		return "" + accNo + "\t" + accountHolder + "\t" + pinNumber + "\t" + accountBalance + "\n";
 	}
 
 }
