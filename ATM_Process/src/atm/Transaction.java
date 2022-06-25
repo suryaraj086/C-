@@ -6,13 +6,24 @@ public class Transaction {
 	TransactionType type;
 	long amount;
 	long closingBalance;
+	long customerId;
 
-	public Transaction(int transactionNum, String descri, TransactionType type, long amounts, long balance) {
+	public long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(long customerId) {
+		this.customerId = customerId;
+	}
+
+	public Transaction(int transactionNum, String descri, TransactionType type, long amounts, long balance,
+			long customerId) {
 		transactionNumber = transactionNum;
 		description = descri;
 		this.type = type;
 		amount = amounts;
 		closingBalance = balance;
+		this.customerId = customerId;
 	}
 
 	public int getTransactionNumber() {
@@ -57,8 +68,8 @@ public class Transaction {
 
 	@Override
 	public String toString() {
-		return "      " + transactionNumber + "     " + description + "      " + type + "     " + amount + "          "
-				+ closingBalance + "\n";
+		return "\t" + transactionNumber + "\t\t" + description + "\t" + type + "\t\t" + amount + "\t" + closingBalance
+				+ "\n";
 	}
 
 }

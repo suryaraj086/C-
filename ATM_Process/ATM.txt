@@ -1,0 +1,6 @@
+Description	Number	Value
+2000		5	0
+500		5	0
+100		5	0
+ 
+Total amount available in the ATM = 0

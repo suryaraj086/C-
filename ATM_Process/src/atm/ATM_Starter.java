@@ -88,6 +88,13 @@ public class ATM_Starter {
 				break;
 
 			default:
+				try {
+					obj.storeTransactionToFile();
+//					obj.storeAtMCashToFile();
+					obj.loadAtMCashFromFile();
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
 				break;
 			}
 		}

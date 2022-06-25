@@ -5,6 +5,15 @@ public class CustomerDetails {
 	String accountHolder;
 	int pinNumber;
 	long accountBalance;
+	long customerId;
+
+	public long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(long customerId) {
+		this.customerId = customerId;
+	}
 
 	public long getAccNo() {
 		return accNo;

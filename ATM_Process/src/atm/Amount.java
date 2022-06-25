@@ -18,7 +18,7 @@ public enum Amount {
 	}
 
 	public void setTwoThosandCount(int twoThosandCount) throws Exception {
-		if (this.twoThosandCount + twoThosandCount <= 0) {
+		if (twoThosandCount <= 0) {
 			throw new Exception("Not Enough change");
 		}
 		this.twoThosandCount = twoThosandCount;
@@ -29,7 +29,7 @@ public enum Amount {
 	}
 
 	public void setHundredCount(int hundredCount) throws Exception {
-		if (this.hundredCount + hundredCount <= 0) {
+		if (hundredCount < 0) {
 			throw new Exception("Not Enough change");
 		}
 		this.hundredCount = hundredCount;
@@ -40,7 +40,7 @@ public enum Amount {
 	}
 
 	public void setFiveHundredCount(int fiveHundredCount) throws Exception {
-		if (this.fiveHundredCount + fiveHundredCount <= 0) {
+		if (fiveHundredCount < 0) {
 			throw new Exception("Not Enough change");
 		}
 		this.fiveHundredCount = fiveHundredCount;
