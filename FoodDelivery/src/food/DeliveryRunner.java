@@ -11,7 +11,13 @@ public class DeliveryRunner {
 		int choice = scan.nextInt();
 		switch (choice) {
 		case 1:
-
+			System.out.println("Enter the customer id");
+			long id = scan.nextLong();
+			System.out.println("Enter the restaurant");
+			String restaurantLoc = scan.nextLine();
+			System.out.println("Enter the delivery location");
+			String delivery = scan.nextLine();
+			System.out.println(obj.order(choice, restaurantLoc, delivery));
 			break;
 		case 2:
 
