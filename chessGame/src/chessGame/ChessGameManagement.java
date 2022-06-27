@@ -366,7 +366,6 @@ public class ChessGameManagement {
 	public void allBlackPath() throws Exception {
 		for (String position : blackPosition.keySet()) {
 			queen(position);
-
 		}
 	}
 
