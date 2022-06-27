@@ -1,5 +1,6 @@
 package chessGame;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class GameRunner {
@@ -65,6 +66,11 @@ public class GameRunner {
 							return;
 						}
 					} finally {
+						try {
+							obj.writeRecord();
+						} catch (IOException e) {
+							System.out.println(e.getMessage());
+						}
 						count++;
 					}
 

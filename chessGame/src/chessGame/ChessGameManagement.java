@@ -1,5 +1,8 @@
 package chessGame;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,14 +56,14 @@ public class ChessGameManagement {
 		blackPosition.put("g8", "B_N");
 		blackPosition.put("h8", "B_R");
 
-		whitePosition.put("a7", "W_P");
-		whitePosition.put("b7", "W_P");
-		whitePosition.put("c7", "W_P");
-		whitePosition.put("d7", "W_P");
-		whitePosition.put("e7", "W_P");
-		whitePosition.put("f7", "W_P");
-		whitePosition.put("g7", "W_P");
-		whitePosition.put("h7", "W_P");
+		blackPosition.put("a7", "B_P");
+		blackPosition.put("b7", "B_P");
+		blackPosition.put("c7", "B_P");
+		blackPosition.put("d7", "B_P");
+		blackPosition.put("e7", "B_P");
+		blackPosition.put("f7", "B_P");
+		blackPosition.put("g7", "B_P");
+		blackPosition.put("h7", "B_P");
 	}
 
 	boolean queensMovement(int[][] grid, int row, int col, int num) {
@@ -74,7 +77,10 @@ public class ChessGameManagement {
 			for (k = 0; k < wordLen; k++) {
 				char val = (char) (cd + 1 + 96);
 				movedPosition = val + "" + (rd + 1);
-				checker(movedPosition, rd, cd, grid);
+				boolean bool = checker(movedPosition, rd, cd, grid);
+				if (!bool) {
+					break;
+				}
 				if (path.size() != 0 && path.get(path.size() - 1).contains("(can be occupied)")) {
 					break;
 				}
@@ -122,7 +128,10 @@ public class ChessGameManagement {
 			for (k = 0; k < wordLen; k++) {
 				char val = (char) (cd + 1 + 96);
 				movedPosition = val + "" + (rd + 1);
-				checker(movedPosition, rd, cd, grid);
+				boolean bool = checker(movedPosition, rd, cd, grid);
+				if (!bool) {
+					break;
+				}
 				if (path.size() != 0 && path.get(path.size() - 1).contains("(can be occupied)")) {
 					break;
 				}
@@ -142,7 +151,10 @@ public class ChessGameManagement {
 			for (k = 0; k < wordLen; k++) {
 				char val = (char) (cd + 1 + 96);
 				movedPosition = val + "" + (rd + 1);
-				checker(movedPosition, rd, cd, grid);
+				boolean bool = checker(movedPosition, rd, cd, grid);
+				if (!bool) {
+					break;
+				}
 				if (path.size() != 0 && path.get(path.size() - 1).contains("(can be occupied)")) {
 					break;
 				}
@@ -157,44 +169,38 @@ public class ChessGameManagement {
 	boolean pawnMovement(int[][] grid, int row, int col, int num) {
 		String movedPosition;
 		int k, rd = row, cd = col;
+		char val = (char) (cd + 1 + 96);
 		int wordLen = pawnChecker(row);
 		for (k = 0; k < wordLen; k++) {
-			char val = (char) (cd + 1 + 96);
-			movedPosition = val + "" + (rd + 1);
-			checker(movedPosition, rd, cd, grid);
 
-			movedPosition = "";
 			if (color.equals("W_")) {
 				rd += 1;
-
 			} else if (color.equals("B_")) {
 				rd -= 1;
 			}
+			val = (char) (cd + 1 + 96);
+			movedPosition = val + "" + (rd + 1);
+			checker(movedPosition, rd, cd, grid);
 		}
 
-		movedPosition = "";
 		if (color.equals("W_")) {
-			rd += 1;
 			cd -= 1;
 		} else if (color.equals("B_")) {
-			rd -= 1;
 			cd -= 1;
-		}
-		char val = (char) (cd + 1 + 96);
-		movedPosition = val + "" + (rd + 1);
-		pawnChecker(movedPosition, rd, cd, grid);
-
-		if (color.equals("W_")) {
-			rd += 1;
-			cd += 1;
-		} else if (color.equals("B_")) {
-			rd -= 1;
-			cd += 1;
 		}
 		val = (char) (cd + 1 + 96);
 		movedPosition = val + "" + (rd + 1);
 		pawnChecker(movedPosition, rd, cd, grid);
 
+		if (color.equals("W_")) {
+			cd += 2;
+		} else if (color.equals("B_")) {
+			cd += 2;
+		}
+
+		val = (char) (cd + 1 + 96);
+		movedPosition = val + "" + (rd + 1);
+		pawnChecker(movedPosition, rd, cd, grid);
 		return false;
 	}
 
@@ -212,7 +218,7 @@ public class ChessGameManagement {
 	}
 
 	public int pawnChecker(int row) {
-		if (row == 1 && color.equals("w_")) {
+		if (row == 1 && color.equals("W_")) {
 			return 2;
 		} else if (row == 6 && color.equals("B_")) {
 			return 2;
@@ -223,7 +229,6 @@ public class ChessGameManagement {
 	boolean knightMovement(int[][] grid, int row, int col, int num) {
 
 		String movedPosition;
-
 		int cd = col - 2, rd = row - 1;
 		char val = (char) (cd + 1 + 96);
 		movedPosition = val + "" + (rd + 1);
@@ -269,11 +274,11 @@ public class ChessGameManagement {
 		return false;
 	}
 
-	public void checker(String movedPosition, int rd, int cd, int[][] grid) {
+	public boolean checker(String movedPosition, int rd, int cd, int[][] grid) {
 		if (rd >= grid.length || rd < 0 || cd >= grid[0].length || cd < 0
 				|| (whitePosition.get(movedPosition) != null && color.equals("W_"))
 				|| (blackPosition.get(movedPosition) != null && color.equals("B_"))) {
-
+			return false;
 		} else if (blackPosition.get(movedPosition) != null && color.equals("W_")) {
 			path.add(movedPosition + "(can be occupied)");
 		} else if (whitePosition.get(movedPosition) != null && color.equals("B_")) {
@@ -286,6 +291,7 @@ public class ChessGameManagement {
 				&& movedPosition.contains(vulnerableString)) {
 			vulnerablePositions.add(currentPiece + " at " + positionOfCurrentPiece + " can capture your coin");
 		}
+		return true;
 	}
 
 	public void movement(String movedPosition, String previousPosition) throws Exception {
@@ -454,7 +460,7 @@ public class ChessGameManagement {
 			currentPiece = piece;
 			positionOfCurrentPiece = position;
 			knightMovement(grid, val1, val, 0);
-		} else if (piece.contains("_p")) {
+		} else if (piece.contains("_P")) {
 			currentPiece = piece;
 			positionOfCurrentPiece = position;
 			pawnMovement(grid, val1, val, 0);
@@ -462,6 +468,15 @@ public class ChessGameManagement {
 			throw new Exception("No Piece Found");
 		}
 		return path;
+	}
+
+	public void writeRecord() throws IOException {
+		File f = new File("record.txt");
+		FileWriter fw = new FileWriter(f);
+		for (int i = 0; i < recording.size(); i++) {
+			fw.write(recording.get(i) + "\n");
+		}
+		fw.close();
 	}
 
 }
