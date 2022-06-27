@@ -1,6 +1,7 @@
 package chessGame;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class GameRunner {
@@ -49,7 +50,11 @@ public class GameRunner {
 					continue;
 				} else {
 					try {
-						System.out.println(obj.queen(chosenPosition));
+						List<String> path = obj.queen(chosenPosition);
+						if (path.isEmpty()) {
+							throw new Exception("No moves found");
+						}
+						System.out.println(path);
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
 						continue;

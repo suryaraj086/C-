@@ -371,7 +371,6 @@ public class ChessGameManagement {
 
 	public List<String> checkVulnerabilty(String piece, String position) throws Exception {
 		vulnerableString = position;
-
 		if (piece.contains("W_")) {
 			allBlackPath();
 			return vulnerablePositions;
@@ -467,9 +466,6 @@ public class ChessGameManagement {
 			throw new Exception("No Piece Found");
 		}
 
-		if (path.isEmpty()) {
-			throw new Exception("No moves found");
-		}
 		return path;
 	}
 
