@@ -18,9 +18,9 @@ public enum Amount {
 	}
 
 	public void restoreOldCount() {
-		twoThosandCount = previousTwoThosandCount;
-		fiveHundredCount = previousFiveHundredCount;
-		hundredCount = previousHundredCount;
+		this.twoThosandCount = previousTwoThosandCount;
+		this.fiveHundredCount = previousFiveHundredCount;
+		this.hundredCount = previousHundredCount;
 	}
 
 	public long calculateTotal() {

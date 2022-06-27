@@ -61,10 +61,20 @@ public class ATM_Process extends Thread {
 				total = HunderdCalculator(total, amount);
 			} else {
 				if (amount <= 1000) {
-					total = HunderdCalculator(total, amount);
+					try {
+						total = HunderdCalculator(total, amount);
+					} catch (Exception e) {
+						Amount.Instance.restoreOldCount();
+						throw new Exception(e.getMessage());
+					}
 				} else {
 					total = fiveHunderdCalculator(total, amount);
-					total = HunderdCalculator(total, amount);
+					try {
+						total = HunderdCalculator(total, amount);
+					} catch (Exception e) {
+						Amount.Instance.restoreOldCount();
+						throw new Exception(e.getMessage());
+					}
 				}
 			}
 		} else {
@@ -301,34 +311,41 @@ public class ATM_Process extends Thread {
 				strCurrentLine += (char) i;
 			}
 			String[] arr = strCurrentLine.split("\t");
-			int accNo = Integer.parseInt(arr[0]);
+			long accNo = Long.parseLong(arr[0]);
 			String name = arr[1];
 			int pin = Integer.parseInt(arr[2]);
 			long amount = Long.parseLong(arr[3]);
-			int count = 5;
+			CustomerDetails cus = new CustomerDetails();
+			cus.setAccNo(accNo);
+			cus.setAccountHolder(name);
+			cus.setAccountBalance(amount);
+			cus.setPinNumber(pin);
+			map.put(accNo, cus);
+			int count = 5, count1 = 6, count2 = 7, count3 = 8;
 			for (i = 0; i < arr.length; i++) {
 				if (i == count) {
-					System.out.println(arr[i]);
-					count++;
-					i++;
+					accNo = Integer.parseInt(arr[i]);
 					continue;
-				} else if (i == count) {
-					System.out.println(arr[i]);
-					count++;
-					i++;
+				} else if (i == count1) {
+					name = arr[i];
 					continue;
-				} else if (i == count) {
-					System.out.println(arr[i]);
-					count++;
-					i++;
+				} else if (i == count2) {
+					pin = Integer.parseInt(arr[i]);
 					continue;
-				} else if (i == count) {
-					System.out.println(arr[i]);
-					count++;
-					i++;
+				} else if (i == count3) {
+					amount = Long.parseLong(arr[i]);
 					continue;
-				} else if (arr[i] == " ") {
-					count++;
+				} else if (i == count3 + 1) {
+					CustomerDetails cus1 = new CustomerDetails();
+					cus1.setAccNo(accNo);
+					cus1.setAccountHolder(name);
+					cus1.setAccountBalance(amount);
+					cus1.setPinNumber(pin);
+					map.put(accNo, cus);
+					count += 5;
+					count1 += 5;
+					count2 += 5;
+					count3 += 5;
 				}
 			}
 		}
