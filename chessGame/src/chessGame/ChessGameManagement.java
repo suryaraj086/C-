@@ -466,6 +466,10 @@ public class ChessGameManagement {
 		} else if (piece.isEmpty()) {
 			throw new Exception("No Piece Found");
 		}
+
+		if (path.isEmpty()) {
+			throw new Exception("No moves found");
+		}
 		return path;
 	}
 
