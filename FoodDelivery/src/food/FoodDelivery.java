@@ -11,6 +11,9 @@ public class FoodDelivery {
 	List<DeliveryHistory> history = new ArrayList<>();
 	Map<Integer, Booking> book = new HashMap<>();
 	int bookingId;
+	int charge;
+	int chargeForNearbyDelivery;
+	int allowance;
 
 	public FoodDelivery() {
 		Executives exe = new Executives();
@@ -30,10 +33,13 @@ public class FoodDelivery {
 				String executive = previBooking.getExecutive();
 				Booking obj = new Booking(customerId, bookingId, restaurantPoint, destination, time, executive);
 				book.put(bookingId++, obj);
+				Executives executiveObj = deilveryExecutives.get(executive);
+				executiveObj.setChargesEarned(chargeForNearbyDelivery);
 				return "Alloted delivery executive " + executive;
 			}
 		}
 		Executives exe = lowEarningExecutives(restaurantPoint);
+		exe.setChargesEarned(charge + allowance);
 		Booking obj1 = new Booking(customerId, bookingId, restaurantPoint, destination, time, exe.getExecutiveNumber());
 		book.put(bookingId++, obj1);
 		return "Alloted delivery executive " + exe.getExecutiveNumber();
