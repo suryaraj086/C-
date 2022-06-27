@@ -1,2 +1,3 @@
-W_P moved from a2 to a3
-B_P moved from b7 to b5
+W_P moved from h2 to h4
+B_P moved from g7 to g6
+W_N moved from g1 to f3

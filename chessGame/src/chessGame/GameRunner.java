@@ -20,12 +20,12 @@ public class GameRunner {
 			} else if (chosenPosition.equals("print")) {
 				String[][] arr = obj.print();
 				for (int i = 0; i < arr.length; i++) {
-					System.out.print(i + 1 + " ");
+					System.out.print(i + 1 + "   ");
 					for (int j = 0; j < arr[0].length; j++) {
 						if (arr[i][j] != null) {
 							System.out.print(arr[i][j] + "  ");
 						} else {
-							System.out.print("   ");
+							System.out.print("     ");
 						}
 					}
 					System.out.println();
@@ -73,7 +73,6 @@ public class GameRunner {
 						}
 						count++;
 					}
-
 				}
 			}
 		}
