@@ -17,7 +17,7 @@ public class DeliveryRunner {
 			String restaurantLoc = scan.nextLine();
 			System.out.println("Enter the delivery location");
 			String delivery = scan.nextLine();
-			System.out.println(obj.order(choice, restaurantLoc, delivery));
+//			System.out.println(obj.order(choice, restaurantLoc, delivery));
 			break;
 		case 2:
 

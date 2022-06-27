@@ -7,10 +7,10 @@ import java.util.Map;
 
 public class FoodDelivery {
 	List<String> points = new ArrayList<>();
-	List<Executives> deilveryExecutives = new ArrayList<>();
+	Map<String, Executives> deilveryExecutives = new HashMap<>();
 	List<DeliveryHistory> history = new ArrayList<>();
 	Map<Integer, Booking> book = new HashMap<>();
-	long bookingId;
+	int bookingId;
 
 	public FoodDelivery() {
 		Executives exe = new Executives();
@@ -23,15 +23,34 @@ public class FoodDelivery {
 		points.add("D");
 	}
 
-	public String order(int customerId, String restaurantPoint, String destination) {
-
-		return "";
+	public String order(int customerId, String restaurantPoint, String destination, long time) {
+		Booking previBooking = book.get(bookingId);
+		if (previBooking.getDestination() == destination) {
+			if (previBooking.getNextDeliveryLimit() < time) {
+				String executive = previBooking.getExecutive();
+				Booking obj = new Booking(customerId, bookingId, restaurantPoint, destination, time, executive);
+				book.put(bookingId++, obj);
+				return "Alloted delivery executive " + executive;
+			}
+		}
+		Executives exe = lowEarningExecutives(restaurantPoint);
+		Booking obj1 = new Booking(customerId, bookingId, restaurantPoint, destination, time, exe.getExecutiveNumber());
+		book.put(bookingId++, obj1);
+		return "Alloted delivery executive " + exe.getExecutiveNumber();
 	}
 
-	public Executives nearByExecutives(String restaurant) {
+	public Executives lowEarningExecutives(String restaurant) {
+		int temp = Integer.MAX_VALUE;
+		Executives e = null;
+		Executives out = null;
 		for (int i = 0; i < deilveryExecutives.size(); i++) {
-			Executives obj = deilveryExecutives.get(i);
+			e = deilveryExecutives.get(i);
+			int val = e.getChargesEarned();
+			if (val < temp) {
+				temp = val;
+				out = deilveryExecutives.get(i);
+			}
 		}
-		return null;
+		return out;
 	}
 }

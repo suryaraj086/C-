@@ -6,13 +6,25 @@ public class Booking {
 	String restaurant;
 	String destination;
 	long time;
+	long nextDeliveryLimit;
+	String executive;
 
-	Booking(long cusId, long id, String res, String des, long currTime) {
+	Booking(long cusId, long id, String res, String des, long currTime, String exe) {
 		bookingId = cusId;
 		bookingId = id;
 		restaurant = res;
 		destination = des;
 		time = currTime;
+		executive = exe;
+		nextDeliveryLimit = currTime + 900000;
+	}
+
+	public long getNextDeliveryLimit() {
+		return nextDeliveryLimit;
+	}
+
+	public String getExecutive() {
+		return executive;
 	}
 
 	public long getBookingId() {
