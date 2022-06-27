@@ -341,7 +341,7 @@ public class ATM_Process extends Thread {
 					cus1.setAccountHolder(name);
 					cus1.setAccountBalance(amount);
 					cus1.setPinNumber(pin);
-					map.put(accNo, cus);
+					map.put(accNo, cus1);
 					count += 5;
 					count1 += 5;
 					count2 += 5;
