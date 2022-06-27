@@ -33,6 +33,7 @@ public class ATM_Process extends Thread {
 			System.out.println("Thread after delay");
 			storeTransactionToFile();
 			interrupt();
+
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -47,6 +48,7 @@ public class ATM_Process extends Thread {
 	public void moneyDistribution(long amount) throws Exception {
 		long total = 0;
 		amountChecker(amount);
+		Amount.Instance.setPreviousCount();
 		if (amount > Amount.Instance.calculateTotal()) {
 			throw new Exception("Insufficient Balance At ATM");
 		}
@@ -70,7 +72,12 @@ public class ATM_Process extends Thread {
 			total += (2000 * 2);
 			Amount.Instance.setTwoThosandCount(twoCount - 2);
 			total = fiveHunderdCalculator(total, amount);
-			total = HunderdCalculator(total, amount);
+			try {
+				total = HunderdCalculator(total, amount);
+			} catch (Exception e) {
+				Amount.Instance.restoreOldCount();
+				throw new Exception(e.getMessage());
+			}
 		}
 	}
 
@@ -123,9 +130,8 @@ public class ATM_Process extends Thread {
 		transaction.put(accNo, arr);
 		balance -= amount;
 		obj.setAccountBalance(balance);
-		ATM_Process t = new ATM_Process();
-		t.start();
-		t.setName("Asynchronous");
+		start();
+		setName("Asynchronous");
 		return "Withdraw Successful";
 	}
 
@@ -157,6 +163,9 @@ public class ATM_Process extends Thread {
 				fromUser.getCustomerId());
 		transferHistory(toAcc, "Transfer from " + fromAcc, TransactionType.credit, amount, toBalance,
 				toUser.getCustomerId());
+		Thread t = new Thread();
+		t.start();
+		t.setName("Asynchronous");
 		return "Transaction Successful";
 	}
 
@@ -274,6 +283,52 @@ public class ATM_Process extends Thread {
 					Amount.Instance.setHundredCount(Integer.parseInt(arr[i]));
 					br.close();
 					return;
+				}
+			}
+		}
+	}
+
+	public void loadCustomerDetailsFromFile() throws IOException {
+		FileReader fr = new FileReader("Customerdetails.txt");
+		try (BufferedReader br = new BufferedReader(fr)) {
+			String strCurrentLine = "";
+			int i;
+			while ((i = br.read()) != -1) {
+				if (i == 10) {
+					strCurrentLine += "\t  \t";
+					continue;
+				}
+				strCurrentLine += (char) i;
+			}
+			String[] arr = strCurrentLine.split("\t");
+			int accNo = Integer.parseInt(arr[0]);
+			String name = arr[1];
+			int pin = Integer.parseInt(arr[2]);
+			long amount = Long.parseLong(arr[3]);
+			int count = 5;
+			for (i = 0; i < arr.length; i++) {
+				if (i == count) {
+					System.out.println(arr[i]);
+					count++;
+					i++;
+					continue;
+				} else if (i == count) {
+					System.out.println(arr[i]);
+					count++;
+					i++;
+					continue;
+				} else if (i == count) {
+					System.out.println(arr[i]);
+					count++;
+					i++;
+					continue;
+				} else if (i == count) {
+					System.out.println(arr[i]);
+					count++;
+					i++;
+					continue;
+				} else if (arr[i] == " ") {
+					count++;
 				}
 			}
 		}

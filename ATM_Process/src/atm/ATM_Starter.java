@@ -89,10 +89,11 @@ public class ATM_Starter {
 
 			default:
 				try {
-					obj.storeCustomerDetailsToFile();
-					obj.storeTransactionToFile();
+//					obj.storeCustomerDetailsToFile();
+//					obj.storeTransactionToFile();
 //					obj.storeAtMCashToFile();
-					obj.loadAtMCashFromFile();
+//					obj.loadAtMCashFromFile();
+					obj.loadCustomerDetailsFromFile();
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}

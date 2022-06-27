@@ -7,6 +7,21 @@ public enum Amount {
 	private int hundredCount;
 	private int fiveHundredCount;
 	private int totalAmount;
+	private int previousTwoThosandCount;
+	private int previousHundredCount;
+	private int previousFiveHundredCount;
+
+	public void setPreviousCount() {
+		previousTwoThosandCount = twoThosandCount;
+		previousHundredCount = hundredCount;
+		previousFiveHundredCount = fiveHundredCount;
+	}
+
+	public void restoreOldCount() {
+		twoThosandCount = previousTwoThosandCount;
+		fiveHundredCount = previousFiveHundredCount;
+		hundredCount = previousHundredCount;
+	}
 
 	public long calculateTotal() {
 		totalAmount = (2000 * twoThosandCount) + (500 * fiveHundredCount) + (100 * hundredCount);
