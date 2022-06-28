@@ -7,6 +7,12 @@ public class CustomerDetails {
 	long accountBalance;
 	long customerId;
 
+	public void pinChecker(int pin) throws Exception {
+		if (pin != pinNumber) {
+			throw new Exception("Invalid pin");
+		}
+	}
+
 	public long getCustomerId() {
 		return customerId;
 	}

@@ -124,9 +124,10 @@ public class ATM_Process extends Thread {
 		}
 	}
 
-	public String withdrawAmount(long accNo, long amount) throws Exception {
+	public String withdrawAmount(long accNo, long amount, int pin) throws Exception {
 		CustomerDetails obj = map.get(accNo);
 		nullChecker(obj);
+		obj.pinChecker(pin);
 		long balance = obj.getAccountBalance();
 		balanceChecker(amount, balance);
 		moneyDistribution(amount);
@@ -157,9 +158,10 @@ public class ATM_Process extends Thread {
 		}
 	}
 
-	public String TransferAccount(long fromAcc, long toAcc, long amount) throws Exception {
+	public String TransferAccount(long fromAcc, long toAcc, long amount, int pin) throws Exception {
 		CustomerDetails fromUser = map.get(fromAcc);
 		nullChecker(fromUser);
+		fromUser.pinChecker(pin);
 		long fromBalance = fromUser.getAccountBalance();
 		balanceChecker(amount, fromBalance);
 		CustomerDetails toUser = map.get(toAcc);

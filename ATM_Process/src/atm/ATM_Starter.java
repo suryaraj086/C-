@@ -49,8 +49,10 @@ public class ATM_Starter {
 					long accountNumber = scan.nextLong();
 					System.out.println("Enter the amount");
 					int amount = scan.nextInt();
+					System.out.println("Enter the pin number");
+					int pin = scan.nextInt();
 					try {
-						System.out.println("-------" + obj.withdrawAmount(accountNumber, amount) + "------");
+						System.out.println("-------" + obj.withdrawAmount(accountNumber, amount, pin) + "------");
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
 					}
@@ -62,8 +64,10 @@ public class ATM_Starter {
 					long toAcc = scan.nextLong();
 					System.out.println("Enter the amount");
 					long amount1 = scan.nextLong();
+					System.out.println("Enter the pin number");
+					int pin1 = scan.nextInt();
 					try {
-						System.out.println(obj.TransferAccount(fromAcc, toAcc, amount1));
+						System.out.println(obj.TransferAccount(fromAcc, toAcc, amount1, pin1));
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
 					}
