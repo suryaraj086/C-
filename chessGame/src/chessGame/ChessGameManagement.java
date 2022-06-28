@@ -311,9 +311,9 @@ public class ChessGameManagement {
 			path.clear();
 			blackCheckMateChecker();
 		} else if (piece.contains("B_")) {
-			blackPosition.remove(movedPosition);
+			blackPosition.remove(previousPosition);
 			blackPosition.put(movedPosition, piece);
-			if (whitePosition.get(previousPosition) != null) {
+			if (whitePosition.get(movedPosition) != null) {
 				recording.add(piece + " at " + previousPosition + "has been captured "
 						+ whitePosition.get(previousPosition) + " to " + movedPosition);
 				whitePosition.remove(movedPosition);

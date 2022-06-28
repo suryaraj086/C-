@@ -1,4 +1,2 @@
-W_N moved from b1 to a3
+W_P moved from a2 to a4
 B_P moved from b7 to b5
-W_N at a3has been captured null to b5
-W_N moved from a3 to b5
