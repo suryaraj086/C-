@@ -19,6 +19,7 @@ public class GameRunner {
 				System.out.println("--------Exiting the game-------");
 				break;
 			} else if (chosenPosition.equals("print")) {
+				count = 8;
 				String[][] arr = obj.print();
 				for (int i = 0; i < arr.length; i++) {
 					System.out.print(i + 1 + "   ");

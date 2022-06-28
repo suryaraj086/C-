@@ -1,5 +1,4 @@
-W_P moved from a7 to a5
-B_P moved from a2 to a4
-W_N moved from g8 to h6
-B_N moved from g1 to h3
-W_N moved from h6 to f5
+W_N moved from b1 to a3
+B_P moved from b7 to b5
+W_N at a3has been captured null to b5
+W_N moved from a3 to b5

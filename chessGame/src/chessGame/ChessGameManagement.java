@@ -28,43 +28,42 @@ public class ChessGameManagement {
 	String positionOfCurrentPiece;
 
 	public ChessGameManagement() {
+		whitePosition.put("a1", "W_R");
+		whitePosition.put("b1", "W_N");
+		whitePosition.put("c1", "W_B");
+		whitePosition.put("d1", "W_Q");
+		whitePosition.put("e1", "W_K");
+		whitePosition.put("f1", "W_B");
+		whitePosition.put("g1", "W_N");
+		whitePosition.put("h1", "W_R");
 
-		whitePosition.put("a8", "W_R");
-		whitePosition.put("b8", "W_N");
-		whitePosition.put("c8", "W_B");
-		whitePosition.put("d8", "W_Q");
-		whitePosition.put("e8", "W_K");
-		whitePosition.put("f8", "W_B");
-		whitePosition.put("g8", "W_N");
-		whitePosition.put("h8", "W_R");
+		whitePosition.put("a2", "W_P");
+		whitePosition.put("b2", "W_P");
+		whitePosition.put("c2", "W_P");
+		whitePosition.put("d2", "W_P");
+		whitePosition.put("e2", "W_P");
+		whitePosition.put("f2", "W_P");
+		whitePosition.put("g2", "W_P");
+		whitePosition.put("h2", "W_P");
 
-		whitePosition.put("a7", "W_P");
-		whitePosition.put("b7", "W_P");
-		whitePosition.put("c7", "W_P");
-		whitePosition.put("d7", "W_P");
-		whitePosition.put("e7", "W_P");
-		whitePosition.put("f7", "W_P");
-		whitePosition.put("g7", "W_P");
-		whitePosition.put("h7", "W_P");
+		blackPosition.put("a8", "B_R");
+		blackPosition.put("b8", "B_N");
+		blackPosition.put("c8", "B_B");
+		blackPosition.put("d8", "B_Q");
+		blackPosition.put("d7", "B_Q");
+		blackPosition.put("e8", "B_K");
+		blackPosition.put("f8", "B_B");
+		blackPosition.put("g8", "B_N");
+		blackPosition.put("h8", "B_R");
 
-		blackPosition.put("a1", "B_R");
-		blackPosition.put("b1", "B_N");
-		blackPosition.put("c1", "B_B");
-		blackPosition.put("d1", "B_Q");
-		blackPosition.put("e1", "B_K");
-		blackPosition.put("f1", "B_B");
-		blackPosition.put("g1", "B_N");
-		blackPosition.put("h1", "B_R");
-
-		blackPosition.put("a2", "B_P");
-		blackPosition.put("b2", "B_P");
-		blackPosition.put("c2", "B_P");
-		blackPosition.put("d2", "B_P");
-		blackPosition.put("e2", "B_P");
-		blackPosition.put("f2", "B_P");
-		blackPosition.put("g2", "B_P");
-		blackPosition.put("h2", "B_P");
-
+		blackPosition.put("a7", "B_P");
+		blackPosition.put("b7", "B_P");
+		blackPosition.put("c7", "B_P");
+		blackPosition.put("d7", "B_P");
+		blackPosition.put("e7", "B_P");
+		blackPosition.put("f7", "B_P");
+		blackPosition.put("g7", "B_P");
+		blackPosition.put("h7", "B_P");
 	}
 
 	boolean queensMovement(int[][] grid, int row, int col, int num) {
@@ -175,9 +174,9 @@ public class ChessGameManagement {
 		for (k = 0; k < wordLen; k++) {
 
 			if (color.equals("W_")) {
-				rd -= 1;
-			} else if (color.equals("B_")) {
 				rd += 1;
+			} else if (color.equals("B_")) {
+				rd -= 1;
 			}
 			val = (char) (cd + 1 + 96);
 			movedPosition = val + "" + (rd + 1);
@@ -219,9 +218,9 @@ public class ChessGameManagement {
 	}
 
 	public int pawnChecker(int row) {
-		if (row == 6 && color.equals("W_")) {
+		if (row == 1 && color.equals("W_")) {
 			return 2;
-		} else if (row == 1 && color.equals("B_")) {
+		} else if (row == 6 && color.equals("B_")) {
 			return 2;
 		}
 		return 1;
@@ -304,7 +303,7 @@ public class ChessGameManagement {
 
 			whitePosition.remove(previousPosition);
 			whitePosition.put(movedPosition, piece);
-			if (blackPosition.get(previousPosition) != null) {
+			if (blackPosition.get(movedPosition) != null) {
 				recording.add(piece + " at " + previousPosition + "has been captured "
 						+ blackPosition.get(previousPosition) + " to " + movedPosition);
 				blackPosition.remove(movedPosition);
@@ -312,7 +311,7 @@ public class ChessGameManagement {
 			path.clear();
 			blackCheckMateChecker();
 		} else if (piece.contains("B_")) {
-			blackPosition.remove(previousPosition);
+			blackPosition.remove(movedPosition);
 			blackPosition.put(movedPosition, piece);
 			if (whitePosition.get(previousPosition) != null) {
 				recording.add(piece + " at " + previousPosition + "has been captured "
