@@ -16,7 +16,7 @@ public class Booking {
 		destination = des;
 		time = currTime;
 		executive = exe;
-		nextDeliveryLimit = currTime + 900000;
+		nextDeliveryLimit = currTime + 900000;//15MIN
 	}
 
 	public long getNextDeliveryLimit() {
