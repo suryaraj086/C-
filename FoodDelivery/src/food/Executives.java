@@ -4,6 +4,26 @@ public class Executives {
 	String executiveNumber;
 	String point;
 	int chargesEarned;
+	State type;
+
+	public Executives() {
+		type = State.IDLE;
+	}
+
+	public State getType() {
+		return type;
+	}
+
+	public void setType(State type) {
+		this.type = type;
+	}
+
+	public Executives(String num, String pnt, int charge) {
+		executiveNumber = num;
+		point = pnt;
+		chargesEarned = charge;
+		type = State.IDLE;
+	}
 
 	public String getExecutiveNumber() {
 		return executiveNumber;
@@ -26,7 +46,7 @@ public class Executives {
 	}
 
 	public void setChargesEarned(int chargesEarned) {
-		this.chargesEarned = chargesEarned;
+		this.chargesEarned += chargesEarned;
 	}
 
 	@Override
