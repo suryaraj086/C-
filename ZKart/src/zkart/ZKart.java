@@ -174,8 +174,6 @@ public class ZKart {
 			Product obj = arr.get(i);
 			nullChecker(obj);
 			obj.getType();
-//			Map<String, List<Product>> map = stock.get(obj.getType());
-//			List<Product> prod = map.get(obj.getBrandName());
 			Product reduceStock = getFromList(obj);
 			reduceStock.setStock(reduceStock.getStock() - obj.getStock());
 			amount += calculateDiscountPrice(reduceStock.getPrice(), reduceStock.getDiscount());
@@ -260,8 +258,10 @@ public class ZKart {
 		return stock.get(type).keySet().toString();
 	}
 
-	public String listAllProduct(String cat, String model) {
+	public String listAllProduct(String cat, String model) throws Exception {
 		Category type = Category.valueOf(cat);
+		nullChecker(cat);
+		nullChecker(type);
 		Map<String, List<Product>> map = stock.get(type);
 		List<Product> products = map.get(model);
 		String out = "";
@@ -271,8 +271,9 @@ public class ZKart {
 		return out;
 	}
 
-	public String changeDiscountPrice(String cat, String model, String product, int discount) {
+	public String changeDiscountPrice(String cat, String model, String product, int discount) throws Exception {
 		Category type = Category.valueOf(cat);
+		nullChecker(type);
 		Map<String, List<Product>> map = stock.get(type);
 		List<Product> products = map.get(model);
 		for (int i = 0; i < products.size(); i++) {
@@ -284,10 +285,13 @@ public class ZKart {
 		return "Discount percentage changed";
 	}
 
-	public String changeStockPrice(String cat, String model, String product, int stock1) {
+	public String changeStockPrice(String cat, String model, String product, int stock1) throws Exception {
 		Category type = Category.valueOf(cat);
+		nullChecker(type);
 		Map<String, List<Product>> map = stock.get(type);
+		nullChecker(map);
 		List<Product> products = map.get(model);
+		nullChecker(product);
 		for (int i = 0; i < products.size(); i++) {
 			Product obj = products.get(i);
 			if (obj.getProductName().equals(product)) {

@@ -47,7 +47,11 @@ public class Runner {
 					String model1 = scan.nextLine();
 					System.out.println("Enter the stocks to add");
 					int stock1 = scan.nextInt();
-					System.out.println(obj.changeStockPrice(cat1, brand1, model1, stock1));
+					try {
+						System.out.println(obj.changeStockPrice(cat1, brand1, model1, stock1));
+					} catch (Exception e2) {
+						System.out.println(e2.getMessage());
+					}
 					break;
 				case 4:
 					scan.nextLine();
@@ -59,7 +63,11 @@ public class Runner {
 					String model = scan.nextLine();
 					System.out.println("Enter the discount price");
 					int discount = scan.nextInt();
-					System.out.println(obj.changeDiscountPrice(cat, brand, model, discount));
+					try {
+						System.out.println(obj.changeDiscountPrice(cat, brand, model, discount));
+					} catch (Exception e2) {
+						System.out.println(e2.getMessage());
+					}
 					break;
 				default:
 					break;
@@ -77,7 +85,11 @@ public class Runner {
 					System.out.println(obj.listModels(category));
 					System.out.println("Enter the model to choose");
 					String model = scan.nextLine();
-					System.out.println(obj.listAllProduct(category, model));
+					try {
+						System.out.println(obj.listAllProduct(category, model));
+					} catch (Exception e2) {
+						System.out.println(e2.getMessage());
+					}
 					System.out.println("Enter the product number to choose");
 					int product = scan.nextInt();
 					System.out.println("Enter the how many product you want to buy");
