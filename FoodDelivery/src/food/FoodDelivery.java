@@ -47,6 +47,7 @@ public class FoodDelivery {
 				executiveObj.setChargesEarned(chargeForNearbyDelivery);
 				DeliveryHistory obj1 = history.get(history.size() - 1);
 				int order = obj1.getOrder();
+				obj1.setDeliveryCharge(executiveObj.getChargesEarned());
 				obj1.setOrder(order + 1);
 				return "Alloted delivery executive " + executive;
 			}
