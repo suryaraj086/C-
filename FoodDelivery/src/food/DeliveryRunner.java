@@ -23,7 +23,7 @@ public class DeliveryRunner {
 				String restaurantLoc = scan.nextLine();
 				System.out.println("Enter the delivery location");
 				String delivery = scan.nextLine();
-				System.out.println("Enter the time");
+				System.out.println("Enter the time(The time should be HH:MM)");
 				String time = scan.nextLine();
 				SimpleDateFormat s = new SimpleDateFormat("HH:MM");
 				Date date = null;

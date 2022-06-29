@@ -45,6 +45,9 @@ public class FoodDelivery {
 				Executives executiveObj = deliveryExecutives.get(executive);
 				executiveObj.setType(State.BUSY);
 				executiveObj.setChargesEarned(chargeForNearbyDelivery);
+				DeliveryHistory obj1 = history.get(history.size() - 1);
+				int order = obj1.getOrder();
+				obj1.setOrder(order + 1);
 				return "Alloted delivery executive " + executive;
 			}
 		}
@@ -54,6 +57,9 @@ public class FoodDelivery {
 		bookingId++;
 		Booking obj1 = new Booking(customerId, bookingId, restaurantPoint, destination, time, exe.getExecutiveNumber());
 		book.put(bookingId, obj1);
+		DeliveryHistory obj = new DeliveryHistory(exe.getExecutiveNumber(), restaurantPoint, destination, 1, time,
+				time + 1800000, exe.getChargesEarned());
+		history.add(obj);
 		return "Alloted delivery executive " + exe.getExecutiveNumber();
 	}
 
@@ -72,7 +78,9 @@ public class FoodDelivery {
 
 	public String getDeliveryHistory() {
 		String out = "";
-		for (Booking obj : book.values()) {
+		out += "Executives\tRestaurant\tDestination\tOrders\tPickup time\tDelivery time\tDelivery Charge\n";
+		for (int i = 0; i < history.size(); i++) {
+			DeliveryHistory obj = history.get(i);
 			out += obj.toString();
 		}
 		return out;

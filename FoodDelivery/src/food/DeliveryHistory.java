@@ -5,10 +5,20 @@ public class DeliveryHistory {
 	String executives;
 	String restaurant;
 	String destination;
-	String order;
-	String pickupTime;
-	String deliveryTime;
-	String deliveryCharge;
+	int order;
+	long pickupTime;
+	long deliveryTime;
+	int deliveryCharge;
+
+	public DeliveryHistory(String exe, String res, String des, int order, long pickup, long delivery, int charge) {
+		executives = exe;
+		restaurant = res;
+		destination = des;
+		this.order = order;
+		pickupTime = pickup;
+		deliveryTime = delivery;
+		deliveryCharge = charge;
+	}
 
 	public String getExecutives() {
 		return executives;
@@ -34,39 +44,42 @@ public class DeliveryHistory {
 		this.destination = destination;
 	}
 
-	public String getOrder() {
+	public int getOrder() {
 		return order;
 	}
 
-	public void setOrder(String order) {
+	public void setOrder(int order) {
 		this.order = order;
 	}
 
-	public String getPickupTime() {
+	public long getPickupTime() {
 		return pickupTime;
 	}
 
-	public void setPickupTime(String pickupTime) {
+	public void setPickupTime(long pickupTime) {
 		this.pickupTime = pickupTime;
 	}
 
-	public String getDeliveryTime() {
+	public long getDeliveryTime() {
 		return deliveryTime;
 	}
 
-	public void setDeliveryTime(String deliveryTime) {
+	public void setDeliveryTime(long deliveryTime) {
 		this.deliveryTime = deliveryTime;
 	}
 
-	public void setDeliveryCharge(String deliveryCharge) {
+	public int getDeliveryCharge() {
+		return deliveryCharge;
+	}
+
+	public void setDeliveryCharge(int deliveryCharge) {
 		this.deliveryCharge = deliveryCharge;
 	}
 
 	@Override
 	public String toString() {
-		return "[executives=" + executives + ", restaurant=" + restaurant + ", destination=" + destination + ", order="
-				+ order + ", pickupTime=" + pickupTime + ", deliveryTime=" + deliveryTime + ", deliveryCharge="
-				+ deliveryCharge + "]";
+		return "" + executives + "\t\t" + restaurant + "\t\t" + destination + "\t\t" + order + "\t" + pickupTime + "\t"
+				+ deliveryTime + "\t" + deliveryCharge + "\n";
 	}
 
 }
