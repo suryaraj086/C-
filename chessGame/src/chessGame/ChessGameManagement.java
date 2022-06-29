@@ -305,7 +305,7 @@ public class ChessGameManagement {
 			whitePosition.put(movedPosition, piece);
 			if (blackPosition.get(movedPosition) != null) {
 				recording.add(piece + " at " + previousPosition + "has been captured "
-						+ blackPosition.get(previousPosition) + " to " + movedPosition);
+						+ blackPosition.get(movedPosition) + " to " + movedPosition);
 				blackPosition.remove(movedPosition);
 			}
 			path.clear();
@@ -315,7 +315,7 @@ public class ChessGameManagement {
 			blackPosition.put(movedPosition, piece);
 			if (whitePosition.get(movedPosition) != null) {
 				recording.add(piece + " at " + previousPosition + "has been captured "
-						+ whitePosition.get(previousPosition) + " to " + movedPosition);
+						+ whitePosition.get(movedPosition) + " to " + movedPosition);
 				whitePosition.remove(movedPosition);
 			}
 			path.clear();
