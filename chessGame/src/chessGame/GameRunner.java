@@ -20,7 +20,7 @@ public class GameRunner {
 				break;
 			} else if (chosenPosition.equals("print")) {
 				String[][] arr = obj.print();
-				for (int i = 0; i < arr.length; i++) {
+				for (int i = arr.length - 1; i >= 0; i--) {
 					System.out.print(i + 1 + "   ");
 					for (int j = 0; j < arr[0].length; j++) {
 						if (arr[i][j] != null) {
