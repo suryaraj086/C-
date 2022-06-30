@@ -34,10 +34,12 @@ public class FoodDelivery {
 		points.add("D");
 	}
 
-	public String order(int customerId, String restaurantPoint, String destination, long time) {
+	public String order(int customerId, String restaurantPoint, String destination, long time) throws Exception {
 		Booking previBooking = book.get(bookingId);
 		if (previBooking != null && previBooking.getDestination().equals(destination)) {
-			if (previBooking.getNextDeliveryLimit() < time) {
+			System.out.println(time);
+			System.out.println(previBooking.getNextDeliveryLimit());
+			if (previBooking.getNextDeliveryLimit() > time) {
 				String executive = previBooking.getExecutive();
 				Booking obj = new Booking(customerId, bookingId, restaurantPoint, destination, time, executive);
 				bookingId++;
@@ -53,13 +55,16 @@ public class FoodDelivery {
 			}
 		}
 		Executives exe = lowEarningExecutives(restaurantPoint);
+		if (exe == null) {
+			throw new Exception("No Idle Executives");
+		}
 		exe.setChargesEarned(charge + allowance);
 		exe.setType(State.BUSY);
 		bookingId++;
 		Booking obj1 = new Booking(customerId, bookingId, restaurantPoint, destination, time, exe.getExecutiveNumber());
 		book.put(bookingId, obj1);
 		DeliveryHistory obj = new DeliveryHistory(exe.getExecutiveNumber(), restaurantPoint, destination, 1, time,
-				time + 1800000, exe.getChargesEarned());
+				time + 1800000/* for 30min */, exe.getChargesEarned());
 		history.add(obj);
 		return "Alloted delivery executive " + exe.getExecutiveNumber();
 	}

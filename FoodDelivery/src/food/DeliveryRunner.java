@@ -25,14 +25,20 @@ public class DeliveryRunner {
 				String delivery = scan.nextLine();
 				System.out.println("Enter the time(The time should be HH:MM)");
 				String time = scan.nextLine();
-				SimpleDateFormat s = new SimpleDateFormat("HH:MM");
+				SimpleDateFormat s = new SimpleDateFormat("hh:mm");
 				Date date = null;
 				try {
 					date = s.parse(time);
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
-				System.out.println(obj.order(id, restaurantLoc, delivery, date.getTime()));
+				System.out.println(date);
+				System.out.println(time);
+				try {
+					System.out.println(obj.order(id, restaurantLoc, delivery, date.getTime()));
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
 				break;
 			case 2:
 				System.out.println(obj.getExecutiveActivity());
