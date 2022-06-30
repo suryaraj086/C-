@@ -169,6 +169,10 @@ public class ZKart {
 		List<Product> arr = cart.get(userName);
 		nullChecker(arr);
 		int amount = 0;
+		int credit = 0;
+		if (arr.isEmpty()) {
+			throw new Exception("No items added to cart");
+		}
 		for (int i = 0; i < arr.size(); i++) {
 			Product obj = arr.get(i);
 			nullChecker(obj);
@@ -177,11 +181,11 @@ public class ZKart {
 			reduceStock.setStock(reduceStock.getStock() - obj.getStock());
 			amount += calculateDiscountPrice(reduceStock.getPrice(), reduceStock.getDiscount());
 			amount *= obj.getStock();
-			int credit = creditCalculator(amount);
-//			System.out.println("The credit amount is " + credit);
+			credit = creditCalculator(amount);
 			user.get(userName).setCredit(credit);
+			arr.remove(i);
 		}
-		return "Bought successfully and amount paid rs " + amount;
+		return "Bought successfully and amount paid rs " + amount + " and the credit earned " + credit;
 	}
 
 	public Product getFromList(Product obj) throws Exception {
