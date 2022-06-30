@@ -130,7 +130,6 @@ public class ZKart {
 				stock.put(type, map);
 			}
 		}
-
 	}
 
 	public void nullChecker(Object inp) throws Exception {
@@ -181,7 +180,6 @@ public class ZKart {
 			int credit = creditCalculator(amount);
 			System.out.println("The credit amount is " + credit);
 			user.get(userName).setCredit(credit);
-
 		}
 		return "Bought successfully and amount paid rs " + amount;
 	}

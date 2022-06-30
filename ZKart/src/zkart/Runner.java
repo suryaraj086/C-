@@ -81,7 +81,7 @@ public class Runner {
 					scan.nextLine();
 					System.out.println(obj.listAllCategory());
 					System.out.println("Enter the category to choose");
-					String category = scan.nextLine();
+					String category = scan.nextLine().toUpperCase();
 					System.out.println(obj.listModels(category));
 					System.out.println("Enter the model to choose");
 					String model = scan.nextLine();
@@ -119,6 +119,7 @@ public class Runner {
 					}
 					break;
 				case 3:
+					scan.nextLine();
 					System.out.println("Enter the product to remove");
 					String prodName = scan.nextLine();
 					try {
