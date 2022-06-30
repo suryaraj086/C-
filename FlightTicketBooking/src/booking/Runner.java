@@ -42,6 +42,7 @@ public class Runner {
 				seat = fObj.seatBooking(flightNum, seatno);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
+				continue;
 			}
 			try {
 				obj.setSeats(seatno, seat);
@@ -50,6 +51,7 @@ public class Runner {
 					fObj.bookingCancellation(id);
 				} catch (Exception e1) {
 					System.out.println(e1.getMessage());
+					continue;
 				}
 				System.out.println(e.getMessage());
 				return;
@@ -63,7 +65,11 @@ public class Runner {
 		}
 		obj = ObjectSetter.bookSetter(obj, arr, id, from, toDes, flightNum, pref);
 		System.out.println(fObj.flightBooking(arr, id, obj));
-		System.out.println("The amount to be paid is " + fObj.paymentCalculation(obj));
+		try {
+			System.out.println("The amount to be paid is " + fObj.paymentCalculation(obj));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		System.out.println("Your booking id is " + id);
 	}
 
@@ -72,8 +78,9 @@ public class Runner {
 		boolean bool = true;
 		Scanner scan = new Scanner(System.in);
 		while (bool) {
-			System.out.println(
-					"1.List of flights\n2.Booking\n3.Cancellation\n4.Available seats\n5.Meal ordered seats\n6.Booking summary");
+			System.out.println("----------------------------------------\n"
+					+ "1.List of flights\n2.Booking\n3.Cancellation\n4.Available seats\n5.Meal ordered seats\n6.Booking summary\n"
+					+ "-----------------------------------------");
 			int val = scan.nextInt();
 			scan.nextLine();
 			switch (val) {
@@ -138,7 +145,12 @@ public class Runner {
 				break;
 
 			case 5:
-				System.out.println(fObj.mealOrderedSeats());
+				List<String> arr = fObj.mealOrderedSeats();
+				if (arr.isEmpty()) {
+					System.out.println("There is no meal ordered seats");
+					continue;
+				}
+				System.out.println(arr);
 				break;
 			case 6:
 				System.out.println("Enter the booking id");
@@ -155,5 +167,4 @@ public class Runner {
 		}
 		scan.close();
 	}
-
 }

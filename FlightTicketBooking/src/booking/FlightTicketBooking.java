@@ -9,10 +9,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class FlightTicketBooking {
 
-	Map<String, Map<String, Seat>> flight = new HashMap<>();
+	Map<String, TreeMap<String, Seat>> flight = new HashMap<String, TreeMap<String, Seat>>();
 	Map<String, Map<String, List<String>>> location = new HashMap<>();
 	Map<Integer, Book> bookings = new HashMap<>();
 	int bookingId = 1;
@@ -20,6 +21,8 @@ public class FlightTicketBooking {
 	int economyClassPrice = 1000;
 	int aislePrice = 100;
 	int mealPrice = 200;
+	int businessClassSurgePrice = 200;
+	int economyClassSurgePrice = 100;
 
 	StringBuilder str = new StringBuilder();
 
@@ -62,9 +65,14 @@ public class FlightTicketBooking {
 				if (classType.length > 1) {
 					String array1[] = classType[1].split(",");
 					int[] values1 = Arrays.stream(array1).mapToInt(Integer::parseInt).toArray();
-					createSeatObj(values[3], values1[3] + values[3], values1, false, flightName);
+					createSeatObj(values[3], values1[3] + values[3], values1, false, flightName, false);
+					createSeatObj(1, values[3], values, true, flightName, false);
+				} else {
+					String array1[] = classType[1].split(",");
+					int[] values1 = Arrays.stream(array1).mapToInt(Integer::parseInt).toArray();
+					createSeatObj(values[3], values1[3] + values[3], values1, false, flightName, true);
+					createSeatObj(1, values[3], values, true, flightName, true);
 				}
-				createSeatObj(1, values[3], values, true, flightName);
 				inp = "";
 				fr1.close();
 			}
@@ -74,7 +82,8 @@ public class FlightTicketBooking {
 		return str.toString();
 	}
 
-	public void createSeatObj(int val, int row, int[] arr, boolean isBusinessClass, String flightNo) {
+	public void createSeatObj(int val, int row, int[] arr, boolean isBusinessClass, String flightNo,
+			boolean isBusinessFlight) {
 		Seat seat;
 		int number = 0;
 		for (int k = val; k <= row; k++) {
@@ -84,22 +93,22 @@ public class FlightTicketBooking {
 					number += 1;
 					String inp = (k + "" + (char) (number + 64));
 					if (j == 1 || j == arr[i]) {
-						seat = ObjectSetter.seatSetter(true, isBusinessClass, inp, flightNo);
+						seat = ObjectSetter.seatSetter(true, isBusinessClass, inp, flightNo, isBusinessFlight);
 						Map<String, Seat> map = new HashMap<>();
 						map.put(inp, seat);
-						Map<String, Seat> flightSeat = flight.get(flightNo);
+						TreeMap<String, Seat> flightSeat = flight.get(flightNo);
 						if (flightSeat == null) {
-							flightSeat = new HashMap<>();
+							flightSeat = new TreeMap<>();
 							flight.put(flightNo, flightSeat);
 						}
 						flightSeat.putAll(map);
 					} else {
-						seat = ObjectSetter.seatSetter(false, isBusinessClass, inp, flightNo);
+						seat = ObjectSetter.seatSetter(false, isBusinessClass, inp, flightNo, isBusinessFlight);
 						Map<String, Seat> map = new HashMap<>();
 						map.put(inp, seat);
-						Map<String, Seat> flightSeat = flight.get(flightNo);
+						TreeMap<String, Seat> flightSeat = flight.get(flightNo);
 						if (flightSeat == null) {
-							flightSeat = new HashMap<>();
+							flightSeat = new TreeMap<>();
 							flight.put(flightNo, flightSeat);
 						}
 						flightSeat.putAll(map);
@@ -182,6 +191,7 @@ public class FlightTicketBooking {
 		if (seat == null) {
 			throw new Exception("Seat not found");
 		}
+		arr.remove(seatNo);
 		return seat;
 	}
 
@@ -214,6 +224,9 @@ public class FlightTicketBooking {
 		}
 		int amount = obj.getAmount();
 		int individual = (amount / (obj.getSeats().size() + 1));
+		if (!seat.isAisleOrWindow()) {
+			individual -= aislePrice;
+		}
 		int newAmount = amount - individual + 200;
 		obj.setAmount(newAmount);
 		return "Cancellation successful and amount to be refunded " + (amount - newAmount);
@@ -254,18 +267,19 @@ public class FlightTicketBooking {
 		return book;
 	}
 
-	public int paymentCalculation(Book obj) {
+	public int paymentCalculation(Book obj) throws Exception {
 		int amount = 0;
+		nullChecker(obj);
 		if (obj.mealPreference) {
 			amount += (mealPrice) * (obj.getSeats().size());
 		}
 		for (Seat seat : obj.getSeats().values()) {
 			if (seat.isBusinessClass()) {
 				amount += businessClassPrice;
-				businessClassPrice += 200;
+				businessClassPrice += businessClassSurgePrice;
 			} else {
 				amount += economyClassPrice;
-				economyClassPrice += 100;
+				economyClassPrice += economyClassSurgePrice;
 			}
 			if (seat.isAisleOrWindow()) {
 				amount += aislePrice;

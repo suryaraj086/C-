@@ -23,12 +23,14 @@ public class ObjectSetter {
 		return pass;
 	}
 
-	public static Seat seatSetter(boolean aisleOrWindow, boolean isBusinessClass, String inp, String flightNo) {
+	public static Seat seatSetter(boolean aisleOrWindow, boolean isBusinessClass, String inp, String flightNo,
+			boolean isBusinessFlight) {
 		Seat seat = new Seat();
 		seat.setAisleOrWindow(aisleOrWindow);
 		seat.setSeatName(inp);
 		seat.setBusinessClass(isBusinessClass);
 		seat.setFlightNo(flightNo);
+		seat.setBusinessFlight(isBusinessFlight);
 		return seat;
 	}
 
