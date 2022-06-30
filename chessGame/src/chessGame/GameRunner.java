@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class GameRunner {
 
 	public static void main(String[] args) {
+		List<String> path = null;
 		ChessGameManagement obj = new ChessGameManagement();
 		Scanner scan = new Scanner(System.in);
 		boolean bool = true;
@@ -50,7 +51,7 @@ public class GameRunner {
 					continue;
 				} else {
 					try {
-						List<String> path = obj.queen(chosenPosition);
+						path = obj.queen(chosenPosition);
 						if (path.isEmpty()) {
 							throw new Exception("No moves found");
 						}
@@ -62,6 +63,16 @@ public class GameRunner {
 					System.out.println("Enter the moved position");
 					String movedPosition = scan.nextLine();
 					try {
+						if (!path.contains(movedPosition)) {
+							path.clear();
+							throw new Exception("Invalid position");
+						}
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+						continue;
+					}
+					try {
+
 						obj.movement(movedPosition, chosenPosition);
 					} catch (Exception e) {
 						System.out.println(e.getMessage());

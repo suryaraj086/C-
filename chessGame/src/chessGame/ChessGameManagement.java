@@ -465,7 +465,6 @@ public class ChessGameManagement {
 		} else if (piece.isEmpty()) {
 			throw new Exception("No Piece Found");
 		}
-
 		return path;
 	}
 
