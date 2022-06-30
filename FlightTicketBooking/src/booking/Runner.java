@@ -100,7 +100,6 @@ public class Runner {
 				default:
 					break;
 				}
-
 				break;
 			case 3:
 				System.out.println("1.Cancel Entire Booking id\n2.Cancel Individual");
@@ -143,7 +142,6 @@ public class Runner {
 					System.out.println(e1.getMessage());
 				}
 				break;
-
 			case 5:
 				List<String> arr = fObj.mealOrderedSeats();
 				if (arr.isEmpty()) {

@@ -16,6 +16,7 @@ public class FlightTicketBooking {
 	Map<String, TreeMap<String, Seat>> flight = new HashMap<String, TreeMap<String, Seat>>();
 	Map<String, Map<String, List<String>>> location = new HashMap<>();
 	Map<Integer, Book> bookings = new HashMap<>();
+	Map<String, Map<String, Integer>> price = new HashMap<>();
 	int bookingId = 1;
 	int businessClassPrice = 2000;
 	int economyClassPrice = 1000;
@@ -46,6 +47,11 @@ public class FlightTicketBooking {
 				String flightName = arr[1];
 				String from = arr[2];
 				String toLoc = arr[3];
+				Map<String, Integer> map = new HashMap<>();
+				map.put("Business", 2000);
+				map.put("Economy", 1000);
+				price.put(flightName, map);
+				inp.trim();
 				inp = "/home/surya-inc1500/eclipse-workspace/FlightTicketBooking/Files/" + inp + ".txt";
 				putDataInLocationMap(flightName, from, toLoc);
 				FileReader fr1 = new FileReader(inp);
@@ -76,7 +82,9 @@ public class FlightTicketBooking {
 				inp = "";
 				fr1.close();
 			}
-			inp += (char) i;
+			if (i != 10) {
+				inp += (char) i;
+			}
 		}
 		fr.close();
 		return str.toString();
@@ -270,21 +278,27 @@ public class FlightTicketBooking {
 	public int paymentCalculation(Book obj) throws Exception {
 		int amount = 0;
 		nullChecker(obj);
-		if (obj.mealPreference) {
+		Map<String, Integer> map = price.get(obj.getFlightName());
+		businessClassPrice = map.get("Business");
+		economyClassSurgePrice = map.get("Economy");
+		if (obj.isMealPreference()) {
 			amount += (mealPrice) * (obj.getSeats().size());
 		}
 		for (Seat seat : obj.getSeats().values()) {
 			if (seat.isBusinessClass()) {
 				amount += businessClassPrice;
 				businessClassPrice += businessClassSurgePrice;
+				map.put("Business", businessClassPrice);
 			} else {
 				amount += economyClassPrice;
 				economyClassPrice += economyClassSurgePrice;
+				map.put("Economy", economyClassSurgePrice);
 			}
 			if (seat.isAisleOrWindow()) {
 				amount += aislePrice;
 			}
 		}
+		price.put(obj.getFlightName(), map);
 		obj.setAmount(amount);
 		return amount;
 	}

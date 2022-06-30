@@ -14,6 +14,8 @@ public class Book {
 	private long landingTime;
 	private Map<String, Seat> seats;
 	private int amount;
+	private String flightName;
+	private boolean mealPreference;
 
 	public int getAmount() {
 		return amount;
@@ -30,9 +32,6 @@ public class Book {
 	public void setMealPreference(boolean mealPreference) {
 		this.mealPreference = mealPreference;
 	}
-
-	String flightName;
-	boolean mealPreference;
 
 	public String getFlightName() {
 		return flightName;
