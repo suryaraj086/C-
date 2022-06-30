@@ -7,16 +7,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class FlightTicketBooking {
 
-	Map<String, TreeMap<String, Seat>> flight = new HashMap<String, TreeMap<String, Seat>>();
+	Map<String, LinkedHashMap<String, Seat>> flight = new HashMap<String, LinkedHashMap<String, Seat>>();
 	Map<String, Map<String, List<String>>> location = new HashMap<>();
 	Map<Integer, Book> bookings = new HashMap<>();
 	Map<String, Map<String, Integer>> price = new HashMap<>();
+
 	int bookingId = 1;
 	int businessClassPrice = 2000;
 	int economyClassPrice = 1000;
@@ -104,9 +105,9 @@ public class FlightTicketBooking {
 						seat = ObjectSetter.seatSetter(true, isBusinessClass, inp, flightNo, isBusinessFlight);
 						Map<String, Seat> map = new HashMap<>();
 						map.put(inp, seat);
-						TreeMap<String, Seat> flightSeat = flight.get(flightNo);
+						LinkedHashMap<String, Seat> flightSeat = flight.get(flightNo);
 						if (flightSeat == null) {
-							flightSeat = new TreeMap<>();
+							flightSeat = new LinkedHashMap<>();
 							flight.put(flightNo, flightSeat);
 						}
 						flightSeat.putAll(map);
@@ -114,9 +115,9 @@ public class FlightTicketBooking {
 						seat = ObjectSetter.seatSetter(false, isBusinessClass, inp, flightNo, isBusinessFlight);
 						Map<String, Seat> map = new HashMap<>();
 						map.put(inp, seat);
-						TreeMap<String, Seat> flightSeat = flight.get(flightNo);
+						LinkedHashMap<String, Seat> flightSeat = flight.get(flightNo);
 						if (flightSeat == null) {
-							flightSeat = new TreeMap<>();
+							flightSeat = new LinkedHashMap<>();
 							flight.put(flightNo, flightSeat);
 						}
 						flightSeat.putAll(map);
