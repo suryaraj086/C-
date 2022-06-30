@@ -35,21 +35,23 @@ public class FoodDelivery {
 	}
 
 	public String order(int customerId, String restaurantPoint, String destination, long time) throws Exception {
-		Booking previBooking = book.get(bookingId);
-		if (previBooking != null && previBooking.getDestination().equals(destination)) {
-			if (previBooking.getNextDeliveryLimit() > time) {
-				String executive = previBooking.getExecutive();
-				Booking obj = new Booking(customerId, bookingId, restaurantPoint, destination, time, executive);
-				bookingId++;
-				book.put(bookingId, obj);
-				Executives executiveObj = deliveryExecutives.get(executive);
-				executiveObj.setType(State.BUSY);
-				executiveObj.setChargesEarned(chargeForNearbyDelivery);
-				DeliveryHistory obj1 = history.get(history.size() - 1);
-				int order = obj1.getOrder();
-				obj1.setDeliveryCharge(executiveObj.getChargesEarned());
-				obj1.setOrder(order + 1);
-				return "Alloted delivery executive " + executive;
+		for (int book_id : book.keySet()) {
+			Booking previBooking = book.get(book_id);
+			if (previBooking != null && previBooking.getDestination().equals(destination)) {
+				if (previBooking.getNextDeliveryLimit() > time) {
+					String executive = previBooking.getExecutive();
+					Booking obj = new Booking(customerId, bookingId, restaurantPoint, destination, time, executive);
+					bookingId++;
+					book.put(bookingId, obj);
+					Executives executiveObj = deliveryExecutives.get(executive);
+					executiveObj.setType(State.BUSY);
+					executiveObj.setChargesEarned(chargeForNearbyDelivery);
+					DeliveryHistory obj1 = history.get(history.size() - 1);
+					int order = obj1.getOrder();
+					obj1.setDeliveryCharge(executiveObj.getChargesEarned());
+					obj1.setOrder(order + 1);
+					return "Alloted delivery executive " + executive;
+				}
 			}
 		}
 		Executives exe = lowEarningExecutives(restaurantPoint);
