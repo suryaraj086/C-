@@ -115,7 +115,7 @@ public class Runner {
 					try {
 						System.out.println(obj.buyProductFromCart(name));
 					} catch (Exception e) {
-						e.printStackTrace();
+						System.out.println(e.getMessage());
 					}
 					break;
 				case 3:

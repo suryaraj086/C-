@@ -16,7 +16,10 @@ public class Product implements Cloneable {
 		return false;
 	}
 
-	public void setLessStock(int lessStock) {
+	public void setLessStock(int lessStock) throws Exception {
+		if (lessStock < 0) {
+			throw new Exception("Less number of products");
+		}
 		this.lessStock = lessStock;
 	}
 

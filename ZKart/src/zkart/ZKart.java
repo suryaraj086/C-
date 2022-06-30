@@ -178,7 +178,7 @@ public class ZKart {
 			amount += calculateDiscountPrice(reduceStock.getPrice(), reduceStock.getDiscount());
 			amount *= obj.getStock();
 			int credit = creditCalculator(amount);
-			System.out.println("The credit amount is " + credit);
+//			System.out.println("The credit amount is " + credit);
 			user.get(userName).setCredit(credit);
 		}
 		return "Bought successfully and amount paid rs " + amount;
@@ -264,7 +264,7 @@ public class ZKart {
 		List<Product> products = map.get(model);
 		String out = "";
 		for (int i = 0; i < products.size(); i++) {
-			out += products.get(i).toString();
+			out += i + "." + products.get(i).toString();
 		}
 		return out;
 	}
