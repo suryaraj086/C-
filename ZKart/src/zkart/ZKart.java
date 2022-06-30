@@ -22,7 +22,7 @@ public class ZKart {
 		arr.add(obj);
 		map.put("Acer", arr);
 		stock.put(Category.LAPTOP, map);
-		UserDetails obj1 = new UserDetails("Admin", "1234", "admin@123.com", 955131531, 10, false);
+		UserDetails obj1 = new UserDetails("Admin", "bbbb", "admin@123.com", 955131531, 10, false);
 		user.put("admin@123.com", obj1);
 
 	}
@@ -141,6 +141,7 @@ public class ZKart {
 	public String loginChecker(String userName, String password) throws Exception {
 		UserDetails obj = user.get(userName);
 		nullChecker(obj);
+		password = encryptPassword(password);
 		boolean bool = obj.passwordValidator(password);
 		if (bool) {
 			return "Admin";
@@ -301,6 +302,44 @@ public class ZKart {
 			}
 		}
 		return "Added stocks";
+	}
+
+	private String encryptPassword(String password) {
+		char[] chars = password.toCharArray();
+		StringBuilder encryptedPassword = new StringBuilder();
+		char k;
+		for (char c : chars) {
+			if (c == 'Z') {
+				k = 'A';
+			} else if (c == 'z') {
+				k = 'a';
+			} else if (c == '9') {
+				k = '0';
+			} else {
+				k = (char) (c + 1);
+			}
+			encryptedPassword.append(k);
+		}
+		return encryptedPassword.toString();
+	}
+
+	private String decryptPassword(String password) {
+		char[] chars = password.toCharArray();
+		StringBuilder decrypted = new StringBuilder();
+		char k;
+		for (char c : chars) {
+			if (c == 'A') {
+				k = 'Z';
+			} else if (c == 'a') {
+				k = 'z';
+			} else if (c == '0') {
+				k = '9';
+			} else {
+				k = (char) (c - 1);
+			}
+			decrypted.append(k);
+		}
+		return decrypted.toString();
 	}
 
 }
