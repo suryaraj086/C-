@@ -63,7 +63,7 @@ public class GameRunner {
 					System.out.println("Enter the moved position");
 					String movedPosition = scan.nextLine();
 					try {
-						if (!path.contains(movedPosition)) {
+						if (!path.contains(movedPosition) && !path.contains(movedPosition + "(can be occupied)")) {
 							path.clear();
 							throw new Exception("Invalid position");
 						}

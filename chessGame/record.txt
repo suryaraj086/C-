@@ -1,1 +1,7 @@
 W_P moved from a2 to a4
+B_N moved from b8 to a6
+W_P moved from b2 to b3
+B_N moved from a6 to c5
+W_P moved from c2 to c4
+B_N at c5has been captured W_P to a4
+B_N moved from c5 to a4
