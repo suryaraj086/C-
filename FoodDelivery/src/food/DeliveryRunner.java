@@ -32,8 +32,7 @@ public class DeliveryRunner {
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
-				System.out.println(date);
-				System.out.println(time);
+
 				try {
 					System.out.println(obj.order(id, restaurantLoc, delivery, date.getTime()));
 				} catch (Exception e) {

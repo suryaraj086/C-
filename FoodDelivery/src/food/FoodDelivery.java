@@ -37,8 +37,6 @@ public class FoodDelivery {
 	public String order(int customerId, String restaurantPoint, String destination, long time) throws Exception {
 		Booking previBooking = book.get(bookingId);
 		if (previBooking != null && previBooking.getDestination().equals(destination)) {
-			System.out.println(time);
-			System.out.println(previBooking.getNextDeliveryLimit());
 			if (previBooking.getNextDeliveryLimit() > time) {
 				String executive = previBooking.getExecutive();
 				Booking obj = new Booking(customerId, bookingId, restaurantPoint, destination, time, executive);
