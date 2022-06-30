@@ -82,7 +82,12 @@ public class Runner {
 					System.out.println(obj.listAllCategory());
 					System.out.println("Enter the category to choose");
 					String category = scan.nextLine().toUpperCase();
-					System.out.println(obj.listModels(category));
+					try {
+						System.out.println(obj.listModels(category));
+					} catch (Exception e) {
+						System.out.println("Invalid category");
+						continue;
+					}
 					System.out.println("Enter the model to choose");
 					String model = scan.nextLine();
 					try {
@@ -100,7 +105,7 @@ public class Runner {
 					case 1:
 						try {
 							System.out.println(obj.addToKart(category, model, product, name, stock));
-						} catch (CloneNotSupportedException e1) {
+						} catch (Exception e1) {
 							System.out.println(e1.getMessage());
 						}
 						break;

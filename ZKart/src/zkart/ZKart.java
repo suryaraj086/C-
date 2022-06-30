@@ -150,7 +150,7 @@ public class ZKart {
 	}
 
 	public String addToKart(String cat, String model, int product, String userName, int numberOfStock)
-			throws CloneNotSupportedException {
+			throws Exception {
 		Category type = Category.valueOf(cat);
 		Map<String, List<Product>> map = stock.get(type);
 		List<Product> products = map.get(model);
@@ -211,8 +211,12 @@ public class ZKart {
 		return newAmount * 20;
 	}
 
-	public String removeFromCart(String product, String userName) {
+	public String removeFromCart(String product, String userName) throws Exception {
 		List<Product> arr = cart.get(userName);
+		nullChecker(arr);
+		if (arr.isEmpty()) {
+			throw new Exception("No items found");
+		}
 		for (int i = 0; i < arr.size(); i++) {
 			if (arr.get(i).getProductName().equals(product)) {
 				arr.remove(i);
@@ -269,7 +273,7 @@ public class ZKart {
 		List<Product> products = map.get(model);
 		String out = "";
 		for (int i = 0; i < products.size(); i++) {
-			out += i + "." + products.get(i).toString();
+			out += products.get(i).toString();
 		}
 		return out;
 	}
