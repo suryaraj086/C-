@@ -67,19 +67,25 @@ public class FlightTicketBooking {
 				str1 = str1.replaceAll(" ", "");
 				str1 = str1.replaceAll("\n", ":");
 				String[] classType = str1.split(":");
+				System.out.println(str1);
 				String array[] = classType[0].split(",");
 				int[] values = Arrays.stream(array).mapToInt(Integer::parseInt).toArray();
 				if (classType.length > 1) {
 					String array1[] = classType[1].split(",");
 					int[] values1 = Arrays.stream(array1).mapToInt(Integer::parseInt).toArray();
-					createSeatObj(values[3], values1[3] + values[3], values1, false, flightName, false);
-					createSeatObj(1, values[3], values, true, flightName, false);
+					createSeatObj(1, values[values.length - 1], values, true, flightName, false);
+					System.out.println(Arrays.toString(values));
+					System.out.println(Arrays.toString(values1));
+					createSeatObj(values[values.length - 1], values1[values1.length - 1] + values[values.length - 1],
+							values1, false, flightName, false);
 				} else {
 					String array1[] = classType[1].split(",");
 					int[] values1 = Arrays.stream(array1).mapToInt(Integer::parseInt).toArray();
-					createSeatObj(values[3], values1[3] + values[3], values1, false, flightName, true);
-					createSeatObj(1, values[3], values, true, flightName, true);
+					createSeatObj(1, values[values.length - 1], values, true, flightName, true);
+					createSeatObj(values[values.length - 1], values1[values1.length - 1] + values[values.length - 1],
+							values1, false, flightName, true);
 				}
+				str1 = "";
 				inp = "";
 				fr1.close();
 			}
@@ -188,7 +194,9 @@ public class FlightTicketBooking {
 	public void seatAllocation(String flightName, List<String> list, Book obj) throws Exception {
 		for (int i = 0; i < list.size(); i++) {
 			String seatName = list.get(i);
+			nullChecker(seatName);
 			Seat seatObj = flight.get(flightName).get(seatName);
+			nullChecker(seatObj);
 			flight.get(flightName).remove(seatName);
 			obj.setSeats(seatName, seatObj);
 		}
