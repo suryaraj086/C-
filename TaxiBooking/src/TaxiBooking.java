@@ -63,23 +63,26 @@ public class TaxiBooking {
 		TaxiHistory temp1 = historySetter(pickupTime, currPoint, toPoint, amount, k++, customerid,
 				booked.getTaxiNumber(), shareStatus);
 		addToHistory(temp1, booked.getTaxiNumber());
-		return "Booked successfully and the amount to pay is " + amount;
+		return "Booked successfully and the amount to pay is " + amount + ", alloted taxi is " + booked.getTaxiNumber();
 	}
 
 	public String bookShareTicket(char fromPoint, char point, long time, int customerId) {
 		List<Book> arr = bookMap.get(point);
+		String name = "";
 		int amount = paymentCalculator(fromPoint, point);
 		for (int i = 0; i < arr.size(); i++) {
 			Book obj = arr.get(i);
 			Boolean bool = timeCalculator(obj.getSource(), obj.getPickuptime(), point, time);
 			if (obj.getDestination() == point && bool) {
 				amount = discountCalculator(amount, discount);
-				TaxiHistory temp1 = historySetter(time, fromPoint, point, amount, k++, customerId, obj.getTaxiName(),
+				name = obj.getTaxiName();
+				TaxiHistory temp1 = historySetter(time, fromPoint, point, amount, k++, customerId, name,
 						obj.isShareStatus());
 				addToHistory(temp1, obj.getTaxiName());
+				return "Booked successfully and the amount to pay is " + amount + ",Allocated taxi is " + name;
 			}
 		}
-		return "Booked successfully and the amount to pay is " + amount;
+		return "Booked successfully and the amount to pay is " + amount + ",Allocated taxi is " + name;
 	}
 
 	public boolean checkTimeAndDestination(char from, char point, long time) {
@@ -225,7 +228,8 @@ public class TaxiBooking {
 		out += "\t\tBookingid\tStart point\tEnd point\tStart time\tBooking type\tCharges\n";
 		Set<String> key = history.keySet();
 		for (String val : key) {
-			out += "Taxi number " + val + " " + history.get(val).toString() + "\n";
+			out += "Taxi number " + val + "\n";
+			out += " " + history.get(val).toString() + "\n";
 		}
 		return out;
 	}

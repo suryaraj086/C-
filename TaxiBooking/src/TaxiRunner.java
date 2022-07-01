@@ -11,7 +11,6 @@ public class TaxiRunner {
 		Scanner scan = new Scanner(System.in);
 		int taxi = scan.nextInt();
 		Taxi taxiobj = new Taxi();
-//		taxiobj.setPosition('B');
 		tObj.createTaxi(taxiobj);
 		for (int i = 0; i < taxi - 1; i++) {
 			Taxi taxipojo = new Taxi();
@@ -61,8 +60,9 @@ public class TaxiRunner {
 							System.out.println(tObj.bookTaxi(date.getTime(), from, to, id, false));
 						}
 						continue;
+					} else {
+						System.out.println(tObj.bookTaxi(date.getTime(), from, to, 1, false));
 					}
-					System.out.println(tObj.bookTaxi(date.getTime(), from, to, 1, false));
 				}
 				break;
 			case 2:
