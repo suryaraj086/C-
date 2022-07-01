@@ -1,11 +1,17 @@
 package zkart;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Runner {
 
 	public static void main(String[] args) {
-		ZKart obj = new ZKart();
+		ZKart obj = null;
+		try {
+			obj = new ZKart();
+		} catch (IOException e3) {
+			System.out.println(e3.getMessage());
+		}
 		Scanner scan = new Scanner(System.in);
 		boolean temp = true;
 		String role = null;

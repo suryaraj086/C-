@@ -15,15 +15,17 @@ public class ZKart {
 	Map<String, List<History>> historyMap = new HashMap<>();
 	Map<String, List<Product>> cart = new HashMap<>();
 
-	public ZKart() {
-		Map<String, List<Product>> map = new HashMap<>();
-		Product obj = new Product("Aspire 7", "Acer", 50000, 10, 3, Category.LAPTOP);
-		List<Product> arr = new ArrayList<>();
-		arr.add(obj);
-		map.put("Acer", arr);
-		stock.put(Category.LAPTOP, map);
-		UserDetails obj1 = new UserDetails("Admin", "bbbb", "admin@123.com", 955131531, 10, false);
-		user.put("admin@123.com", obj1);
+	public ZKart() throws IOException {
+//		Map<String, List<Product>> map = new HashMap<>();
+//		Product obj = new Product("Aspire 7", "Acer", 50000, 10, 3, Category.LAPTOP);
+//		List<Product> arr = new ArrayList<>();
+//		arr.add(obj);
+//		map.put("Acer", arr);
+//		stock.put(Category.LAPTOP, map);
+//		UserDetails obj1 = new UserDetails("Admin", "bbbb", "admin@123.com", 955131531, 10, false);
+//		user.put("admin@123.com", obj1);
+		customerInitialization();
+		inventoryInitialization();
 
 	}
 
@@ -47,7 +49,7 @@ public class ZKart {
 		long number = 0;
 		int credit = 0;
 		int count = 0, count1 = 1, count2 = 4, count3 = 5, count4 = 6;
-		for (int i = 0; i < arr.length; i++) {
+		for (int i = 0; i <= arr.length; i++) {
 			if (i == count) {
 				username = arr[i];
 			} else if (i == count1) {
@@ -64,8 +66,11 @@ public class ZKart {
 				count2 += 7;
 				count3 += 7;
 				count4 += 7;
+				if (i != arr.length) {
+					i--;
+				}
 				UserDetails obj = new UserDetails(username, password, name, number, credit, false);
-				user.put(name, obj);
+				user.put(username, obj);
 			}
 		}
 	}
@@ -86,11 +91,11 @@ public class ZKart {
 			}
 		}
 		String arr[] = strCurrentLine.split("\t");
-		String name = null, brand = null, model = null;
+		String brand = null, model = null;
 		Category type = null;
 		int price = 0, stock1 = 0, discount = 0;
 		int count = 0, count1 = 2, count2 = 3, count3 = 4, count4 = 5, count5 = 6;
-		for (int i = 0; i < arr.length; i++) {
+		for (int i = 0; i <= arr.length; i++) {
 			if (i == count) {
 				type = Category.valueOf(arr[i]);
 				continue;
@@ -110,13 +115,16 @@ public class ZKart {
 				discount = Integer.parseInt(arr[i]);
 				continue;
 			} else if (i == count5 + 1) {
-				Product cus1 = new Product(name, brand, price, stock1, discount, type);
+				Product cus1 = new Product(model, brand, price, stock1, discount, type);
 				count += 7;
 				count1 += 7;
 				count2 += 7;
 				count3 += 7;
 				count4 += 7;
 				count5 += 7;
+				if (i != arr.length) {
+					i--;
+				}
 				Map<String, List<Product>> map = stock.get(type);
 				if (map == null) {
 					map = new HashMap<>();
@@ -255,7 +263,7 @@ public class ZKart {
 		Category[] out = Category.values();
 		String output = "";
 		for (int i = 0; i < out.length; i++) {
-			output += (i + 1) + "." + out[i].toString() + "\n";
+			output += out[i].toString() + "\n";
 		}
 		return output;
 	}
@@ -273,7 +281,7 @@ public class ZKart {
 		List<Product> products = map.get(model);
 		String out = "";
 		for (int i = 0; i < products.size(); i++) {
-			out += products.get(i).toString();
+			out += i + "." + products.get(i).toString();
 		}
 		return out;
 	}
