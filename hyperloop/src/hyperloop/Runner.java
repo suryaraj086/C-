@@ -3,20 +3,21 @@ package hyperloop;
 import java.util.Scanner;
 
 public class Runner {
-	static NodeWeighted A = new NodeWeighted(0, "A");
-	static NodeWeighted B = new NodeWeighted(1, "B");
-	static NodeWeighted C = new NodeWeighted(2, "C");
-	static NodeWeighted D = new NodeWeighted(3, "D");
-	static NodeWeighted E = new NodeWeighted(4, "E");
-	static NodeWeighted F = new NodeWeighted(5, "F");
-	static NodeWeighted G = new NodeWeighted(6, "G");
-	static GraphWeighted graphWeighted = new GraphWeighted(true);
+	NodeWeighted A = new NodeWeighted(0, "A");
+	NodeWeighted B = new NodeWeighted(1, "B");
+	NodeWeighted C = new NodeWeighted(2, "C");
+	NodeWeighted D = new NodeWeighted(3, "D");
+	NodeWeighted E = new NodeWeighted(4, "E");
+	NodeWeighted F = new NodeWeighted(5, "F");
+	NodeWeighted G = new NodeWeighted(6, "G");
 
-	public static void addSourceAndDestination(String source, String destination, int distance) {
+	GraphWeighted graphWeighted = new GraphWeighted(true);
+
+	public void addSourceAndDestination(String source, String destination, int distance) {
 		graphWeighted.addEdge(getObject(source), getObject(destination), distance);
 	}
 
-	public static NodeWeighted getObject(String source) {
+	public NodeWeighted getObject(String source) {
 		switch (source) {
 		case "A":
 			return A;
@@ -37,6 +38,7 @@ public class Runner {
 	}
 
 	public static void main(String[] args) {
+		Runner run = new Runner();
 		Scanner scan = new Scanner(System.in);
 		Hyperloop hyper = new Hyperloop();
 		boolean bool = true;
@@ -59,7 +61,7 @@ public class Runner {
 				for (int i = 0; i < totalStation; i++) {
 					String val = scan.nextLine();
 					String[] arr = val.split(" ");
-					addSourceAndDestination(arr[0], arr[1], Integer.parseInt(arr[2]));
+					run.addSourceAndDestination(arr[0], arr[1], Integer.parseInt(arr[2]));
 				}
 			} else if (inp.contains("ADD_PASSENGER")) {
 				int length = Integer.parseInt(inp.charAt(inp.length() - 1) + "");
@@ -74,10 +76,17 @@ public class Runner {
 			} else if (inp.contains("START_POD")) {
 				int members = Integer.parseInt(inp.charAt(inp.length() - 1) + "");
 				for (int i = 0; i < members; i++) {
-					Passenger pass = hyper.getHighAgePassenger();
-					String path = graphWeighted.DijkstraShortestPath(getObject(Spoint),
-							getObject(pass.getDestination()));
+					Passenger pass = null;
+					try {
+						pass = hyper.getHighAgePassenger();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
+					String path = run.graphWeighted.DijkstraShortestPath(run.getObject(Spoint),
+							run.getObject(pass.getDestination()));
 					System.out.println(pass.toString() + path);
+					run.graphWeighted.resetNodesVisited();
+
 				}
 			} else if (inp.contains("PRINT_Q")) {
 				System.out.println(hyper.passengerQueue());

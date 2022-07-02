@@ -25,8 +25,11 @@ public class Hyperloop {
 		Collections.sort(passengerList, new SortByAge());
 	}
 
-	public Passenger getHighAgePassenger() {
+	public Passenger getHighAgePassenger() throws Exception {
 		int index = passengerList.size() - 1;
+		if (index < 0) {
+			throw new Exception("Passengers not found");
+		}
 		Passenger pass = passengerList.get(index);
 		passengerList.remove(index);
 		return pass;

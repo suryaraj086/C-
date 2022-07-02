@@ -1,6 +1,5 @@
 package hyperloop;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -13,10 +12,6 @@ public class GraphWeighted {
 	GraphWeighted(boolean directed) {
 		this.directed = directed;
 		nodes = new HashSet<>();
-	}
-
-	public void addNode(NodeWeighted... n) {
-		nodes.addAll(Arrays.asList(n));
 	}
 
 	public void addEdge(NodeWeighted source, NodeWeighted destination, double weight) {
@@ -69,7 +64,7 @@ public class GraphWeighted {
 			NodeWeighted currentNode = closestReachableUnvisited(shortestPathMap);
 
 			if (currentNode == null) {
-				out += "There isn't a path between " + start.name + " and " + end.name;
+//				out = "There isn't a path between " + start.name + " and " + end.name;
 				return out;
 			}
 

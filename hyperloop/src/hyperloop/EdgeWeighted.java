@@ -7,6 +7,7 @@ public class EdgeWeighted implements Comparable<EdgeWeighted> {
 	double weight;
 
 	EdgeWeighted(NodeWeighted s, NodeWeighted d, double w) {
+
 		source = s;
 		destination = d;
 		weight = w;
