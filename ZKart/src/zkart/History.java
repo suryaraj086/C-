@@ -8,6 +8,27 @@ public class History {
 	int creditUsed;
 	int totalPrice;
 	int creditAdded;
+	int invoiceNumber;
+
+	public int getInvoiceNumber() {
+		return invoiceNumber;
+	}
+
+	public void setInvoiceNumber(int invoiceNumber) {
+		this.invoiceNumber = invoiceNumber;
+	}
+
+	public History(Category category, String brand, String model, int creditUsed, int totalPrice, int creditAdded,
+			int invoiceNumber) {
+		super();
+		this.category = category;
+		this.brand = brand;
+		this.model = model;
+		this.creditUsed = creditUsed;
+		this.totalPrice = totalPrice;
+		this.creditAdded = creditAdded;
+		this.invoiceNumber = invoiceNumber;
+	}
 
 	public Category getCategory() {
 		return category;

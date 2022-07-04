@@ -127,7 +127,15 @@ public class Runner {
 							break;
 						case 2:
 							try {
-								System.out.println(obj.buyProductFromCart(name));
+								System.out.println("Do you want to user credit\n1.Yes\n2.No");
+								int yesorno = scan.nextInt();
+								if (yesorno == 1) {
+									System.out.println(obj.buyProductFromCart(name, true));
+								} else if (yesorno == 2) {
+									System.out.println(obj.buyProductFromCart(name, false));
+								} else {
+									continue;
+								}
 							} catch (Exception e) {
 								System.out.println(e.getMessage());
 							}

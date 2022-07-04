@@ -14,6 +14,7 @@ public class ZKart {
 	Map<Category, Map<String, List<Product>>> stock = new HashMap<>();
 	Map<String, List<History>> historyMap = new HashMap<>();
 	Map<String, List<Product>> cart = new HashMap<>();
+	int invoiceNumber = 1;
 
 	public ZKart() throws IOException {
 //		Map<String, List<Product>> map = new HashMap<>();
@@ -175,9 +176,11 @@ public class ZKart {
 		return "Added to cart";
 	}
 
-	public String buyProductFromCart(String userName) throws Exception {
+	public String buyProductFromCart(String userName, boolean userCredit) throws Exception {
 		List<Product> arr = cart.get(userName);
+		UserDetails userObj = user.get(userName);
 		nullChecker(arr);
+		int creditVal = 0;
 		int amount = 0;
 		int credit = 0;
 		if (arr.isEmpty()) {
@@ -191,9 +194,26 @@ public class ZKart {
 			reduceStock.setStock(reduceStock.getStock() - obj.getStock());
 			amount += calculateDiscountPrice(reduceStock.getPrice(), reduceStock.getDiscount());
 			amount *= obj.getStock();
+			if (userCredit) {
+				creditVal = userObj.getCredit();
+				if (creditVal <= 0) {
+
+				} else {
+					amount -= creditVal;
+					userObj.setCredit(-creditVal);
+				}
+			}
 			credit = creditCalculator(amount);
 			user.get(userName).setCredit(credit);
 			arr.remove(i);
+			History his = new History(obj.getType(), obj.getBrandName(), obj.getProductName(), creditVal, amount,
+					credit, invoiceNumber++);
+			List<History> list = historyMap.get(userName);
+			if (list == null) {
+				list = new ArrayList<>();
+			}
+			list.add(his);
+			historyMap.put(userName, list);
 		}
 		return "Bought successfully and amount paid rs " + amount + " and the credit earned " + credit;
 	}
