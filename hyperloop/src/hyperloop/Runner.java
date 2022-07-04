@@ -13,11 +13,14 @@ public class Runner {
 
 	GraphWeighted graphWeighted = new GraphWeighted(true);
 
-	public void addSourceAndDestination(String source, String destination, int distance) {
+	public void addSourceAndDestination(String source, String destination, int distance) throws Exception {
 		graphWeighted.addEdge(getObject(source), getObject(destination), distance);
 	}
 
-	public NodeWeighted getObject(String source) {
+	public NodeWeighted getObject(String source) throws Exception {
+		if (source == null) {
+			throw new Exception("No pod found");
+		}
 		switch (source) {
 		case "A":
 			return A;
@@ -61,7 +64,11 @@ public class Runner {
 				for (int i = 0; i < totalStation; i++) {
 					String val = scan.nextLine();
 					String[] arr = val.split(" ");
-					run.addSourceAndDestination(arr[0], arr[1], Integer.parseInt(arr[2]));
+					try {
+						run.addSourceAndDestination(arr[0], arr[1], Integer.parseInt(arr[2]));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			} else if (inp.contains("ADD_PASSENGER")) {
 				int length = Integer.parseInt(inp.charAt(inp.length() - 1) + "");
@@ -82,14 +89,20 @@ public class Runner {
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
 					}
-					String path = run.graphWeighted.DijkstraShortestPath(run.getObject(Spoint),
-							run.getObject(pass.getDestination()));
+					String path = null;
+					try {
+						path = run.graphWeighted.DijkstraShortestPath(run.getObject(Spoint),
+								run.getObject(pass.getDestination()));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					System.out.println(pass.toString() + path);
 					run.graphWeighted.resetNodesVisited();
-
 				}
 			} else if (inp.contains("PRINT_Q")) {
 				System.out.println(hyper.passengerQueue());
+			} else {
+				System.out.println("Invalid command");
 			}
 		}
 		scan.close();
