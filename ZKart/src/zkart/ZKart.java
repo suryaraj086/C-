@@ -22,9 +22,10 @@ public class ZKart {
 //		arr.add(obj);
 //		map.put("Acer", arr);
 //		stock.put(Category.LAPTOP, map);
-//		UserDetails obj1 = new UserDetails("Admin", "bbbb", "admin@123.com", 955131531, 10, false);
-//		user.put("admin@123.com", obj1);
+
 		customerInitialization();
+		UserDetails obj1 = new UserDetails("Admin", "bbbb", "admin@123.com", 955131531, 10, true);
+		user.put("admin@123.com", obj1);
 		inventoryInitialization();
 
 	}
@@ -134,7 +135,7 @@ public class ZKart {
 					prod = new ArrayList<>();
 				}
 				prod.add(cus1);
-				map.put(model, prod);
+				map.put(brand, prod);
 				stock.put(type, map);
 			}
 		}
