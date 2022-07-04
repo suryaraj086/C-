@@ -335,23 +335,31 @@ public class ZKart {
 		return encryptedPassword.toString();
 	}
 
-	private String decryptPassword(String password) {
-		char[] chars = password.toCharArray();
-		StringBuilder decrypted = new StringBuilder();
-		char k;
-		for (char c : chars) {
-			if (c == 'A') {
-				k = 'Z';
-			} else if (c == 'a') {
-				k = 'z';
-			} else if (c == '0') {
-				k = '9';
-			} else {
-				k = (char) (c - 1);
-			}
-			decrypted.append(k);
-		}
-		return decrypted.toString();
+	public String addNewUser(UserDetails user1) {
+		String pass = user1.getPassword();
+		pass = encryptPassword(pass);
+		user1.setPassword(pass);
+		user.put(user1.getEmail(), user1);
+		return "User added";
 	}
+
+//	private String decryptPassword(String password) {
+//		char[] chars = password.toCharArray();
+//		StringBuilder decrypted = new StringBuilder();
+//		char k;
+//		for (char c : chars) {
+//			if (c == 'A') {
+//				k = 'Z';
+//			} else if (c == 'a') {
+//				k = 'z';
+//			} else if (c == '0') {
+//				k = '9';
+//			} else {
+//				k = (char) (c - 1);
+//			}
+//			decrypted.append(k);
+//		}
+//		return decrypted.toString();
+//	}
 
 }
