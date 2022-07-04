@@ -7,6 +7,7 @@ public class Transaction {
 	long amount;
 	long closingBalance;
 	long customerId;
+	long accNo;
 
 	public long getCustomerId() {
 		return customerId;
@@ -17,13 +18,22 @@ public class Transaction {
 	}
 
 	public Transaction(int transactionNum, String descri, TransactionType type, long amounts, long balance,
-			long customerId) {
+			long customerId, long accNo) {
 		transactionNumber = transactionNum;
 		description = descri;
 		this.type = type;
 		amount = amounts;
 		closingBalance = balance;
 		this.customerId = customerId;
+		this.accNo = accNo;
+	}
+
+	public long getAccNo() {
+		return accNo;
+	}
+
+	public void setAccNo(long accNo) {
+		this.accNo = accNo;
 	}
 
 	public int getTransactionNumber() {

@@ -6,11 +6,16 @@ public class ATM_Starter {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		ATM_Process obj = new ATM_Process();
+		ATM_Process obj = null;
+		try {
+			obj = new ATM_Process();
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
 		boolean bool = true;
 		while (bool) {
-			System.out
-					.println("------------------\n1.Load cash to ATM\n2.Show customer details\n3.Show ATM Operations ");
+			System.out.println(
+					"------------------\n1.Load cash to ATM\n2.Show customer details\n3.Show ATM Operations\n4.Store to file ");
 			System.out.println("------------------");
 			int choice = scan.nextInt();
 			switch (choice) {
@@ -22,7 +27,8 @@ public class ATM_Starter {
 				System.out.println("Enter the number of 100's");
 				int hundreds = scan.nextInt();
 				try {
-					obj.loadToATM(hundreds, fiveHundreds, twoThousands);
+					obj.loadToATM(twoThousands, fiveHundreds, hundreds);
+					obj.storeAtMCashToFile();
 				} catch (Exception e1) {
 					System.out.println(e1.getMessage());
 				}
@@ -53,6 +59,8 @@ public class ATM_Starter {
 					int pin = scan.nextInt();
 					try {
 						System.out.println("-------" + obj.withdrawAmount(accountNumber, amount, pin) + "------");
+						obj.storeAtMCashToFile();
+						obj.storeCustomerDetailsToFile();
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
 					}
@@ -68,6 +76,7 @@ public class ATM_Starter {
 					int pin1 = scan.nextInt();
 					try {
 						System.out.println(obj.TransferAccount(fromAcc, toAcc, amount1, pin1));
+						obj.storeCustomerDetailsToFile();
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
 					}
@@ -88,19 +97,18 @@ public class ATM_Starter {
 				default:
 					break;
 				}
-
 				break;
-
-			default:
+			case 4:
 				try {
-//					obj.storeCustomerDetailsToFile();
-//					obj.storeTransactionToFile();
-//					obj.storeAtMCashToFile();
-//					obj.loadAtMCashFromFile();
-					obj.loadCustomerDetailsFromFile();
+					obj.storeCustomerDetailsToFile();
+					obj.storeTransactionToFile();
+					obj.storeAtMCashToFile();
 				} catch (Exception e) {
-					System.out.println(e.getMessage());
+					e.getMessage();
 				}
+				break;
+			default:
+
 				break;
 			}
 		}

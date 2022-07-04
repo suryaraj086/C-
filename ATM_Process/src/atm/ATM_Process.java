@@ -16,15 +16,17 @@ public class ATM_Process extends Thread {
 	Map<Long, List<Transaction>> transaction = new HashMap<>();
 	int transactionNumber = 1000;
 
-	public ATM_Process() {
-		CustomerDetails cus = new CustomerDetails();
-		cus.setAccNo(1);
-		cus.setAccountBalance(5000);
-		cus.setAccountHolder("Surya");
-		cus.setPinNumber(1234);
-		cus.setCustomerId(1);
-		long val = 1;
-		map.put(val, cus);
+	public ATM_Process() throws NumberFormatException, Exception {
+//		CustomerDetails cus = new CustomerDetails();
+//		cus.setAccNo(1);
+//		cus.setAccountBalance(5000);
+//		cus.setAccountHolder("Surya");
+//		cus.setPinNumber(1234);
+//		cus.setCustomerId(1);
+//		long val = 1;
+//		map.put(val, cus);
+		loadAtMCashFromFile();
+		loadCustomerDetailsFromFile();
 	}
 
 	public void run() {
@@ -132,7 +134,7 @@ public class ATM_Process extends Thread {
 		balanceChecker(amount, balance);
 		moneyDistribution(amount);
 		Transaction tran = new Transaction(transactionNumber++, "Cash Withdrawal", TransactionType.debit, amount,
-				balance, obj.getCustomerId());
+				balance - amount, obj.getCustomerId(), obj.getAccNo());
 		List<Transaction> arr = transaction.get(accNo);
 		if (arr == null) {
 			arr = new ArrayList<>();
@@ -175,15 +177,14 @@ public class ATM_Process extends Thread {
 				fromUser.getCustomerId());
 		transferHistory(toAcc, "Transfer from " + fromAcc, TransactionType.credit, amount, toBalance,
 				toUser.getCustomerId());
-		Thread t = new Thread();
-		t.start();
-		t.setName("Asynchronous");
+		start();
+		setName("Asynchronous");
 		return "Transaction Successful";
 	}
 
 	public void transferHistory(long accNo, String description, TransactionType type, long amount, long balance,
 			long id) {
-		Transaction tran = new Transaction(transactionNumber++, description, type, amount, balance, id);
+		Transaction tran = new Transaction(transactionNumber++, description, type, amount, balance, id, accNo);
 		List<Transaction> arr = transaction.get(accNo);
 		if (arr == null) {
 			arr = new ArrayList<>();
@@ -242,10 +243,12 @@ public class ATM_Process extends Thread {
 		FileWriter fw = null;
 		for (List<Transaction> arr : transaction.values()) {
 			Transaction obj1 = arr.get(0);
-			File f = new File(obj1.getCustomerId() + "_transacion.txt");
-			f.createNewFile();
+			File f = new File(obj1.getAccNo() + "_transacion.txt");
+			if (!f.exists()) {
+				f.createNewFile();
+			}
 			fw = new FileWriter(f, true);
-			fw.write("Transaction number\tDescription\tDebit/Credit\tAmount\tClosing Balance\n");
+//			fw.write("Transaction number\tDescription\tDebit/Credit\tAmount\tClosing Balance\n");
 			for (int i = 0; i < arr.size(); i++) {
 				Transaction obj = arr.get(i);
 				fw.write(obj.toString());
