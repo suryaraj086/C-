@@ -265,8 +265,9 @@ public class ATM_Process extends Thread {
 		FileWriter fw = new FileWriter(f);
 		for (CustomerDetails obj : map.values()) {
 			fw.write(obj.toString());
-			fw.close();
+
 		}
+		fw.close();
 	}
 
 	public void storeAtMCashToFile() throws IOException {

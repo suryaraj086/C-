@@ -1,6 +1,6 @@
 Description	Number	Value
-2000		61	122000
-500		666	333000
-100		66	6600
+2000		50	100000
+500		50	25000
+100		50	5000
  
-Total amount available in the ATM = 461600
+Total amount available in the ATM = 130000

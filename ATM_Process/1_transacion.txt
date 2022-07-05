@@ -1,1 +1,4 @@
 	1000		Cash Withdrawal	debit		1000	13500
+	1000		Cash Withdrawal	debit		5000	5300
+	1000		Cash Withdrawal	debit		5000	5300
+	1000		Transfer to 2	debit		1000	5300
