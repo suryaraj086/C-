@@ -1,6 +1,6 @@
 package hyperloop;
 
-public class EdgeWeighted implements Comparable<EdgeWeighted> {
+public class EdgeWeighted {
 
 	NodeWeighted source;
 	NodeWeighted destination;
@@ -15,14 +15,6 @@ public class EdgeWeighted implements Comparable<EdgeWeighted> {
 
 	public String toString() {
 		return String.format("(%s -> %s, %f)", source.name, destination.name, weight);
-	}
-
-	public int compareTo(EdgeWeighted otherEdge) {
-
-		if (this.weight > otherEdge.weight) {
-			return 1;
-		} else
-			return -1;
 	}
 
 }

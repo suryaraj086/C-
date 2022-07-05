@@ -88,6 +88,7 @@ public class Runner {
 						pass = hyper.getHighAgePassenger();
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
+						continue;
 					}
 					String path = null;
 					try {
@@ -95,6 +96,7 @@ public class Runner {
 								run.getObject(pass.getDestination()));
 					} catch (Exception e) {
 						e.printStackTrace();
+						continue;
 					}
 					System.out.println(pass.toString() + path);
 					run.graphWeighted.resetNodesVisited();
